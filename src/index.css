@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --el-color-primary: #2C3E50;
+  --el-color-success: #27AE60;
+  --el-color-warning: #F1C40F;
+  --el-color-danger: #E74C3C;
+  --el-color-info: #7F8C8D;
+  
+  --el-bg-color: #FFFFFF;
+  --el-bg-color-overlay: #ECF0F1;
+  --el-text-color-primary: #2C3E50;
+  --el-text-color-regular: #7F8C8D;
+  --el-border-color: #BDC3C7;
+  --el-border-radius-base: 8px;
+}
+
+body {
+  background-color: var(--el-bg-color);
+  color: var(--el-text-color-primary);
+}
+
+.el-button {
+  border-radius: 8px;
+}
+
+.el-button--primary {
+  background-color: var(--el-color-primary);
+}
+
+.el-button--primary:hover {
+  background-color: #34495E;
+}
+
+.el-card {
+  background-color: var(--el-bg-color);
+  border-color: var(--el-border-color);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
+}
+
+.el-input__wrapper,
+.el-select .el-input__wrapper {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 1px var(--el-border-color);
+}
+
+.el-input__wrapper:hover,
+.el-select .el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--el-color-primary);
+}
+
+.el-dialog {
+  background-color: var(--el-bg-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.el-menu {
+  background-color: transparent;
+  border-right: none;
+}
+
+.el-drawer {
+  background-color: var(--el-bg-color);
+}
+
+.feature-card {
+  background-color: var(--el-bg-color);
+  border: 1px solid var(--el-border-color);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  border-color: var(--el-color-primary);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
