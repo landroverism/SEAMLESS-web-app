@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "build": "vue-tsc --noEmit && vite build",
+    "debug": "vue-tsc --traceResolution",
   },
   "dependencies": {
     "@vueuse/core": "^10.9.0",
@@ -16,6 +16,11 @@
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
+  {
+    "engines": {
+      "node": ">=18.0.0 <21.0.0"
+    }
+  }
   "devDependencies": {
     "@types/node": "^20.11.24",
     "@vitejs/plugin-vue": "^5.0.4",
