@@ -5,7 +5,7 @@
         <div>
           <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
             <scissors-icon :size="24" class="text-highlight" />
-            Seamless
+            Tailorly
           </h3>
           <p class="text-sm text-secondary/80 mb-6">
             Revolutionizing the tailoring industry through technology and connecting customers with expert tailors worldwide.
@@ -71,7 +71,7 @@
 
       <div class="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between gap-4">
         <p class="text-sm text-secondary/80">
-          © {{ new Date().getFullYear() }} Seamless. All rights reserved.
+          © {{ new Date().getFullYear() }} Tailorly. All rights reserved.
         </p>
         <div class="flex gap-6">
           <a 
@@ -148,7 +148,7 @@ const services = [
 const contactInfo = [
   { icon: MapPinIcon, label: 'Kenyatta Avenue, Nakuru West' },
   { icon: PhoneIcon, label: '+2547 13593401' },
-  { icon: MailIcon, label: 'seamless@gmail.com' }
+  { icon: MailIcon, label: 'tailorly@gmail.com' }
 ]
 
 const legalLinks = [

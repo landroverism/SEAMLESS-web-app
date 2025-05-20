@@ -1,10 +1,10 @@
-# Seamless - Custom Tailoring Platform
+# Tailorly - Custom Tailoring Platform
 
-![Seamless](https://images.unsplash.com/photo-1606293459339-aa5d34a7b0e1?auto=format&fit=crop&q=80&w=1200)
+![Tailorly](https://images.unsplash.com/photo-1606293459339-aa5d34a7b0e1?auto=format&fit=crop&q=80&w=1200)
 
 ## Overview
 
-Seamless is a modern web platform that connects customers with expert tailors for custom-fitted garments. The platform simplifies the tailoring process by providing digital measurements, expert tailor matching, and seamless appointment booking.
+Tailorly is a modern web platform that connects customers with expert tailors for custom-fitted garments. The platform simplifies the tailoring process by providing digital measurements, expert tailor matching, and seamless appointment booking.
 
 ## Features
 
@@ -46,7 +46,7 @@ npm run dev
 ## Project Structure
 
 ```
-seamless/
+tailorly/
 ├── src/
 │   ├── components/     # Reusable UI components
 │   ├── views/          # Page components
@@ -77,8 +77,8 @@ seamless/
 
 ## Contact
 
-- Website: [seamless.com](https://seamless.com)  yet to get customised Domain
-- Twitter: [@seamless](https://twitter.com/seamless)
+- Website: [tailorly.com](https://tailorly.com)  yet to get customised Domain
+- Twitter: [@tailorly](https://twitter.com/tailorly)
 
 ## Acknowledgments
 

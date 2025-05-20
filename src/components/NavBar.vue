@@ -4,7 +4,7 @@
       <div class="h-16 flex items-center justify-between">
         <router-link to="/" class="flex items-center gap-2 text-xl font-bold text-primary group">
           <scissors-icon :size="24" class="text-accent transform group-hover:rotate-45 transition-transform duration-300" />
-          <span class="group-hover:text-accent transition-colors">Seamless</span>
+          <span class="group-hover:text-accent transition-colors">Tailorly</span>
         </router-link>
 
         <div class="hidden lg:flex items-center gap-8">
@@ -55,7 +55,7 @@
       <template #header>
         <div class="flex items-center gap-2">
           <scissors-icon :size="24" class="text-accent" />
-          <span class="text-xl font-bold text-primary">Seamless</span>
+          <span class="text-xl font-bold text-primary">Tailorly</span>
         </div>
       </template>
 
