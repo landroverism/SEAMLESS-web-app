@@ -27,12 +27,12 @@ Tailorly is a modern web platform that connects customers with expert tailors fo
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/landroverism/SEAMLESS-web-app.git
+git clone https://github.com/landroverism/Tailorly.git
 ```
 
 2. Install dependencies:
 ```bash
-cd SEAMLESS-web-app
+cd Tailorly
 npm install
 ```
 
