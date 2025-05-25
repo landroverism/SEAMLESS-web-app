@@ -9,7 +9,8 @@
       <el-step v-for="step in steps" :key="step.label" :title="step.label" />
     </el-steps>
 
-    <div v-if="measurementsSaved" class="mb-8">
+    <!-- Desktop success alert -->
+    <div v-if="measurementsSaved && windowWidth > 768" class="mb-8">
       <el-alert
         type="success"
         show-icon
@@ -29,6 +30,18 @@
         </template>
       </el-alert>
     </div>
+    
+    <!-- Mobile notification for success -->
+    <mobile-notification
+      v-if="showMobileNotification"
+      title="Measurements Saved!"
+      message="Your measurements have been saved successfully"
+      type="success"
+      action-text="New Measurements"
+      :duration="5000"
+      @close="showMobileNotification = false"
+      @action="resetMeasurements"
+    />
 
     <el-row :gutter="24">
       <el-col :span="12">
@@ -130,8 +143,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { HelpCircle, ArrowLeft, ArrowRight, Save, RefreshCw } from 'lucide-vue-next'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { HelpCircle, RefreshCw, ArrowLeft, ArrowRight, Save } from 'lucide-vue-next'
+import MobileNotification from '../components/MobileNotification.vue'
 import type { Component } from 'vue'
 
 interface Step {
@@ -186,11 +200,29 @@ const steps: Step[] = [
   }
 ]
 
+// Track window width for responsive layout
+const windowWidth = ref(window.innerWidth)
+
+// Update window width on resize
+const handleResize = () => {
+  windowWidth.value = window.innerWidth
+}
+
+// Add and remove event listeners
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
+
 const activeStep = ref(0)
 const showTips = ref(false)
 const measurements = ref<Record<string, number>>({})
 const saving = ref(false)
 const measurementsSaved = ref(false)
+const showMobileNotification = ref(false)
 
 const currentStep = computed(() => steps[activeStep.value])
 const isLastStep = computed(() => activeStep.value === steps.length - 1)
@@ -228,6 +260,12 @@ const saveMeasurements = async () => {
   // Simulate API call
   await new Promise(resolve => setTimeout(resolve, 1500))
   measurementsSaved.value = true
+  
+  // Show mobile notification on small screens
+  if (windowWidth.value <= 768) {
+    showMobileNotification.value = true
+  }
+  
   saving.value = false
 }
 

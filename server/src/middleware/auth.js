@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { ApiError } = require('./errorHandler');
-const supabase = require('../services/supabase.service');
+const { supabase } = require('../services/supabase.service');
 
 /**
  * Middleware to authenticate JWT token

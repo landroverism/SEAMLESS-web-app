@@ -155,21 +155,46 @@ exports.login = async (req, res, next) => {
     const { email, password } = req.body;
 
     // Sign in with Supabase auth
-    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
+    let authData, authError;
+    try {
+      const authResponse = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+      authData = authResponse.data;
+      authError = authResponse.error;
+    } catch (connectionError) {
+      console.error('Supabase connection error:', connectionError);
+      return res.status(503).json({
+        success: false,
+        message: 'Authentication service unavailable. Please try again later.',
+        error: connectionError.message || 'Connection timeout'
+      });
+    }
 
     if (authError) {
       throw new ApiError('Invalid credentials', 401);
     }
 
-    // Get tailor profile using admin client to bypass RLS
-    const { data: tailor, error: tailorError } = await supabase
-      .from('tailors')
-      .select('*')
-      .eq('id', authData.user.id)
-      .single();
+    // Get tailor profile
+    let tailor, tailorError;
+    try {
+      const tailorResponse = await supabase
+        .from('tailors')
+        .select('*')
+        .eq('id', authData.user.id)
+        .single();
+      
+      tailor = tailorResponse.data;
+      tailorError = tailorResponse.error;
+    } catch (connectionError) {
+      console.error('Supabase connection error during profile retrieval:', connectionError);
+      return res.status(503).json({
+        success: false,
+        message: 'Profile service unavailable. Please try again later.',
+        error: connectionError.message || 'Connection timeout'
+      });
+    }
 
     if (tailorError || !tailor) {
       // Profile doesn't exist, create it automatically

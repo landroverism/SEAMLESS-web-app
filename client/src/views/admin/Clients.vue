@@ -3,7 +3,7 @@
     <el-container>
       <!-- Main Content -->
       <el-main class="bg-gray-50 p-6">
-        <div class="mb-6 flex justify-between items-center">
+        <div class="client-list-header mb-6 flex justify-between items-center">
           <h1 class="text-2xl font-bold text-primary">Client Management</h1>
           <el-button type="primary">
             <plus-icon :size="18" class="mr-2" />
@@ -19,12 +19,13 @@
               placeholder="Search clients..."
               prefix-icon="Search"
               clearable
+              class="search-box mobile-full-width"
             />
             <el-select
               v-model="filterStatus"
               placeholder="Filter by status"
               clearable
-              class="w-full"
+              class="w-full mobile-full-width"
             >
               <el-option label="Active" value="active" />
               <el-option label="Inactive" value="inactive" />
@@ -33,7 +34,7 @@
             <el-select
               v-model="sortBy"
               placeholder="Sort by"
-              class="w-full"
+              class="w-full mobile-full-width"
             >
               <el-option label="Name (A-Z)" value="name_asc" />
               <el-option label="Name (Z-A)" value="name_desc" />
@@ -96,15 +97,16 @@
             </el-table-column>
           </el-table>
           
-          <div class="flex justify-center mt-4">
+          <div class="flex justify-center mt-4 overflow-x-auto py-2">
             <el-pagination
               v-model:current-page="currentPage"
               v-model:page-size="pageSize"
               :page-sizes="[10, 20, 50, 100]"
-              layout="total, sizes, prev, pager, next, jumper"
+              :layout="windowWidth <= 768 ? 'prev, pager, next' : 'total, sizes, prev, pager, next, jumper'"
               :total="totalClients"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
+              class="flex-wrap"
             />
           </div>
         </el-card>
@@ -115,7 +117,8 @@
     <el-dialog
       v-model="clientDetailsVisible"
       title="Client Details"
-      width="70%"
+      :width="windowWidth <= 768 ? '95%' : '70%'"
+      class="client-details-dialog"
     >
       <div v-if="selectedClient">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -337,7 +340,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import {
   PlusIcon,
   EyeIcon,
@@ -624,10 +627,59 @@ const addNote = () => {
   
   newNote.value = ''
 }
+
+// Responsive window width detection
+const windowWidth = ref(window.innerWidth)
+
+// Update window width on resize
+function handleResize() {
+  windowWidth.value = window.innerWidth
+}
+
+// Add and remove event listeners
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <style scoped>
 .el-main {
   padding: 20px;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .el-main {
+    padding: 12px;
+  }
+  
+  .el-table {
+    font-size: 0.875rem;
+  }
+  
+  .el-pagination {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .client-details-dialog .el-tabs__item {
+    padding: 0 10px;
+    font-size: 0.875rem;
+  }
+  
+  /* Improve touch targets */
+  .el-button {
+    min-height: 36px;
+    min-width: 36px;
+  }
+  
+  /* Ensure buttons in groups are easier to tap */
+  .el-button-group .el-button {
+    margin-right: 2px;
+  }
 }
 </style>

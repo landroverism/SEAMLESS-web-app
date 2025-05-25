@@ -51,7 +51,7 @@ const router = createRouter({
     // Admin routes
     {
       path: '/admin',
-      component: () => import('../views/admin/AdminLayout.vue'),
+      component: () => import('../views/admin/AdminView.vue'),
       children: [
         {
           path: '',
@@ -92,6 +92,12 @@ const router = createRouter({
           name: 'admin-settings',
           meta: { requiresAuth: true },
           component: () => import('../views/admin/Settings.vue')
+        },
+        {
+          path: 'appointments',
+          name: 'admin-appointments',
+          meta: { requiresAuth: true },
+          component: () => import('../views/admin/Appointments.vue')
         }
       ]
     }

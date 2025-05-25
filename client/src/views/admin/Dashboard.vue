@@ -1,10 +1,10 @@
 <template>
   <div class="admin-dashboard">
     <!-- Dashboard Header -->
-    <div class="flex justify-between items-center mb-6">
+    <div class="dashboard-header flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold">Dashboard</h2>
-      <div class="flex items-center gap-4">
-        <el-select v-model="timeRange" placeholder="Time Range" size="small">
+      <div class="actions flex flex-wrap items-center gap-4">
+        <el-select v-model="timeRange" placeholder="Time Range" size="small" class="mobile-full-width">
           <el-option label="Last 7 days" value="7days" />
           <el-option label="Last 30 days" value="30days" />
           <el-option label="Last 90 days" value="90days" />
@@ -33,7 +33,7 @@
             <el-card shadow="hover" class="overview-card">
               <div class="flex items-center gap-4">
                 <div class="p-3 rounded-full bg-green-100">
-                  <users-icon :size="24" class="text-green-500" />
+                  <UsersIcon :size="24" class="text-green-500" />
                 </div>
                 <div>
                   <p class="text-gray-500 text-sm">Active Clients</p>
@@ -190,7 +190,8 @@ import {
   ArrowUpIcon,
   AlertCircleIcon,
   EyeIcon,
-  MessageSquareIcon
+  MessageSquareIcon,
+  UsersIcon
 } from 'lucide-vue-next'
 import CurrencyFormatter from '../../components/CurrencyFormatter.vue'
 import CurrencySelector from '../../components/CurrencySelector.vue'

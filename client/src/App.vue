@@ -1,7 +1,8 @@
 <template>
-  <el-config-provider :theme="themeOverrides">
+  <el-config-provider>
     <div class="min-h-screen flex flex-col bg-secondary">
-      <nav-bar />
+      <nav-bar class="desktop-nav" />
+      <mobile-menu class="md:hidden" />
       <main class="flex-grow">
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
@@ -10,6 +11,7 @@
         </router-view>
       </main>
       <app-footer />
+      <mobile-feedback />
     </div>
   </el-config-provider>
 </template>
@@ -18,16 +20,12 @@
 import { ref } from 'vue'
 import NavBar from './components/NavBar.vue'
 import AppFooter from './components/AppFooter.vue'
+import MobileMenu from './components/MobileMenu.vue'
+import MobileFeedback from './components/MobileFeedback.vue'
+import './assets/css/mobile-responsive.css'
 
-const themeOverrides = ref({
-  colors: {
-    'primary': '#2C3E50',
-    'success': '#27AE60',
-    'warning': '#F1C40F',
-    'danger': '#E74C3C',
-    'info': '#7F8C8D',
-  }
-})
+// Theme is now applied via CSS variables in index.css
+// This provides better compatibility with the ElConfigProvider
 </script>
 
 <style>

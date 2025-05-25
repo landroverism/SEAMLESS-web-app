@@ -14,6 +14,7 @@ const clientRoutes = require('./routes/clients.routes');
 const orderRoutes = require('./routes/orders.routes');
 const inventoryRoutes = require('./routes/inventory.routes');
 const analyticsRoutes = require('./routes/analytics.routes');
+const appointmentsRoutes = require('./routes/appointments.routes');
 
 // Initialize express app
 const app = express();
@@ -31,6 +32,7 @@ app.use('/api/clients', clientRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/appointments', appointmentsRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {

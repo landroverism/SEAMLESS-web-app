@@ -1,0 +1,454 @@
+/* Mobile Responsiveness Enhancements for Tailorly
+ * This file contains mobile-specific styles to improve the application's
+ * responsiveness on smaller screens.
+ *
+ * Contents:
+ * 1. Global Mobile Adjustments
+ * 2. Admin Dashboard Responsiveness
+ * 3. Measurement Tab Containers
+ * 4. Mobile Navigation Menu
+ * 5. Client List Responsiveness
+ * 6. Orders Page Responsiveness
+ * 7. Form Responsiveness
+ * 8. Appointment Booking Pop-up
+ * 9. Utility Classes for Mobile
+ */
+
+/* Global Mobile Adjustments */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* Prevent iOS zoom on input focus */
+  }
+  
+  /* Increase touch targets */
+  button, 
+  .el-button,
+  a.nav-link,
+  .el-dropdown-link,
+  .el-input__inner {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Adjust spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Fix overflow issues */
+  .el-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+/* Admin Dashboard Responsiveness */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1rem;
+  }
+  
+  /* Convert grid layouts to single column */
+  .grid-cols-1,
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Adjust card spacing */
+  .overview-card {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  
+  /* Make dashboard header stack on mobile */
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .dashboard-header .actions {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  /* Adjust font sizes for readability */
+  h3.text-2xl {
+    font-size: 1.25rem;
+  }
+  
+  /* Make tables scrollable horizontally */
+  .el-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  /* Adjust chart containers */
+  .chart-container {
+    height: 250px !important;
+  }
+}
+
+/* Measurement Tab Containers */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+.video-container iframe,
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .measurement-tabs .el-tabs__header {
+    margin-bottom: 1rem;
+  }
+  
+  .measurement-tabs .el-tabs__nav {
+    width: 100%;
+    display: flex;
+  }
+  
+  .measurement-tabs .el-tabs__item {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .measurement-input {
+    height: 44px; /* Larger touch target */
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
+  
+  /* Collapsible sections */
+  .measurement-section {
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 1rem;
+  }
+  
+  .measurement-section-header {
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Mobile Navigation Menu */
+.mobile-menu-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-button {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 50;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    outline: none;
+  }
+  
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  /* Hamburger icon */
+  .hamburger {
+    width: 24px;
+    height: 20px;
+    position: relative;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+  }
+  
+  .hamburger span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #2c3e50;
+    border-radius: 3px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+  }
+  
+  .hamburger span:nth-child(1) {
+    top: 0px;
+  }
+  
+  .hamburger span:nth-child(2) {
+    top: 8px;
+  }
+  
+  .hamburger span:nth-child(3) {
+    top: 16px;
+  }
+  
+  .hamburger.is-active span:nth-child(1) {
+    top: 8px;
+    transform: rotate(135deg);
+  }
+  
+  .hamburger.is-active span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+  }
+  
+  .hamburger.is-active span:nth-child(3) {
+    top: 8px;
+    transform: rotate(-135deg);
+  }
+  
+  /* Mobile slide-in menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .mobile-menu.is-active {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .menu-content {
+    background-color: white;
+    height: 100%;
+    width: 80%;
+    max-width: 300px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .menu-content.is-active {
+    transform: translateX(0);
+  }
+  
+  .mobile-menu-item {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .mobile-menu-item a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #2c3e50;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+  
+  .mobile-menu-item a:hover,
+  .mobile-menu-item a.router-link-active {
+    background-color: #f5f7fa;
+  }
+}
+
+/* Client List Responsiveness */
+@media (max-width: 768px) {
+  .client-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .client-list-header .search-box {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .client-card {
+    flex-direction: column;
+  }
+  
+  .client-card .client-avatar {
+    margin-bottom: 1rem;
+    align-self: center;
+  }
+  
+  .client-card .client-info {
+    width: 100%;
+  }
+  
+  .client-card .client-actions {
+    margin-top: 1rem;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* Orders Page Responsiveness */
+@media (max-width: 768px) {
+  .order-filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .order-filters .el-select {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .order-card {
+    padding: 0.75rem;
+  }
+  
+  .order-card .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .order-card .order-status {
+    margin-top: 0.5rem;
+  }
+  
+  .order-details-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Form Responsiveness */
+@media (max-width: 768px) {
+  .el-form-item {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-actions .el-button {
+    width: 100%;
+  }
+  
+  /* Date pickers and selects */
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__inner,
+  .el-select {
+    width: 100%;
+  }
+}
+
+/* Appointment Booking Pop-up */
+.appointment-dialog {
+  width: 90% !important;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .appointment-dialog {
+    width: 95% !important;
+    margin: 10px auto !important;
+  }
+  
+  .appointment-dialog .el-dialog__body {
+    padding: 15px !important;
+  }
+  
+  .appointment-dialog .el-form-item {
+    margin-bottom: 15px;
+  }
+  
+  /* Date and time pickers */
+  .appointment-dialog .el-date-editor,
+  .appointment-dialog .el-time-picker {
+    width: 100% !important;
+  }
+  
+  /* Convert horizontal layouts to vertical */
+  .appointment-dialog .form-row {
+    flex-direction: column;
+  }
+  
+  .appointment-dialog .form-col {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  /* Mobile calendar optimizations */
+  .el-picker-panel {
+    width: 90% !important;
+    max-width: 320px;
+  }
+  
+  .el-date-table td {
+    padding: 8px 0;
+  }
+  
+  .el-date-table td .cell {
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+  }
+  
+  /* Appointment action buttons */
+  .appointment-dialog .dialog-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .appointment-dialog .dialog-footer .el-button {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+}
+
+/* Utility Classes for Mobile */
+@media (max-width: 768px) {
+  .mobile-full-width {
+    width: 100% !important;
+  }
+  
+  .mobile-stack {
+    flex-direction: column !important;
+  }
+  
+  .mobile-center {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  
+  .mobile-hidden {
+    display: none !important;
+  }
+  
+  .mobile-visible {
+    display: block !important;
+  }
+  
+  .mobile-p-4 {
+    padding: 1rem !important;
+  }
+  
+  .mobile-mt-4 {
+    margin-top: 1rem !important;
+  }
+}
