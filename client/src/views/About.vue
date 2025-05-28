@@ -23,11 +23,11 @@
       <!-- Story Section -->
       <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
         <div class="order-2 md:order-1">
-          <h2 class="text-2xl font-bold mb-4 text-primary">Our Story</h2>
-          <p class="text-gray-600 mb-4">
+          <h2 class="text-3xl font-bold mb-6 text-primary">Our Story</h2>
+          <p class="text-lg font-medium mb-5 leading-relaxed bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Founded in 2023, Tailorly emerged from a simple yet powerful idea: to bridge the gap between skilled tailors and customers seeking perfect-fitting garments.
           </p>
-          <p class="text-gray-600 mb-4">
+          <p class="text-lg font-medium mb-5 leading-relaxed bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             We believe that everyone deserves clothing that fits perfectly and makes them feel confident. Our platform combines traditional tailoring expertise with modern technology to make custom clothing accessible to all.
           </p>
           <div class="flex gap-4 mt-6">
@@ -66,28 +66,28 @@
             class="text-accent mx-auto mb-4 transform transition-transform duration-300 hover:scale-110"
             :size="32"
           />
-          <h3 class="text-xl font-bold mb-2 text-primary">{{ value.title }}</h3>
+          <h3 class="text-xl font-bold mb-2 text-blue-600">{{ value.title }}</h3>
           <p class="text-gray-600">{{ value.description }}</p>
         </div>
       </div>
 
       <!-- Mission Section -->
-      <div class="bg-secondary rounded-lg p-8 md:p-12 relative overflow-hidden">
+      <div class="bg-gradient-to-r from-secondary to-secondary-light rounded-lg p-8 md:p-12 relative overflow-hidden shadow-lg">
         <div class="absolute inset-0 bg-pattern opacity-5"></div>
-        <h2 class="text-2xl font-bold mb-6 text-center text-primary relative z-10">Our Mission</h2>
+        <h2 class="text-3xl font-bold mb-6 text-center text-primary relative z-10">Our Mission</h2>
         <div class="grid md:grid-cols-2 gap-8 items-center relative z-10">
           <div>
-            <p class="text-gray-600 mb-4">
+            <p class="text-xl font-medium mb-5 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               At Tailorly, we're on a mission to revolutionize the tailoring industry by:
             </p>
-            <ul class="space-y-4">
+            <ul class="space-y-5">
               <li 
                 v-for="(point, index) in missionPoints" 
                 :key="index" 
-                class="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300"
+                class="flex items-start gap-4 transform hover:translate-x-2 transition-transform duration-300 hover:scale-105"
               >
-                <check-circle-icon class="text-accent mt-1" :size="20" />
-                <span class="text-gray-600">{{ point }}</span>
+                <check-circle-icon class="text-accent mt-1" :size="24" />
+                <span class="text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-medium">{{ point }}</span>
               </li>
             </ul>
           </div>
@@ -198,6 +198,25 @@ const teamMembers = [
   overflow: hidden;
 }
 
+/* Animation for mission points */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+ul li {
+  animation: fadeIn 0.5s ease-out forwards;
+  animation-delay: calc(var(--index) * 0.1s);
+  opacity: 0;
+}
+
+ul li:nth-child(1) { --index: 1; }
+ul li:nth-child(2) { --index: 2; }
+ul li:nth-child(3) { --index: 3; }
+ul li:nth-child(4) { --index: 4; }
+ul li:nth-child(5) { --index: 5; }
+
+
 .get-started-btn::after {
   content: '';
   position: absolute;
@@ -218,7 +237,7 @@ const teamMembers = [
 
 .feature-card {
   background: white;
-  border: 1px solid #ECF0F1;
+  border: 1px solidrgb(0, 0, 0);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
