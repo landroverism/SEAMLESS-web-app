@@ -1,0 +1,209 @@
+/* Element Plus Theme Variables */
+:root {
+  /* Light Theme */
+  --el-color-primary: var(--color-primary);
+  --el-color-primary-light-3: var(--color-primary-light);
+  --el-color-primary-light-5: rgba(44, 62, 80, 0.15);
+  --el-color-primary-light-7: rgba(44, 62, 80, 0.1);
+  --el-color-primary-light-9: rgba(44, 62, 80, 0.05);
+  --el-color-success: var(--color-success);
+  --el-color-warning: var(--color-warning);
+  --el-color-danger: var(--color-danger);
+  --el-color-info: var(--color-info);
+  --el-color-white: var(--color-card);
+  --el-bg-color: var(--color-background);
+  --el-bg-color-overlay: var(--color-card);
+  --el-text-color-primary: var(--color-text);
+  --el-text-color-regular: var(--color-text);
+  --el-text-color-secondary: var(--color-text-muted);
+  --el-border-color: var(--color-border);
+  --el-border-color-light: var(--color-border);
+  --el-border-color-lighter: var(--color-border);
+  --el-fill-color: var(--color-background);
+  --el-fill-color-light: var(--color-hover);
+  --el-fill-color-blank: var(--color-card);
+  --el-box-shadow: 0 2px 4px var(--color-shadow);
+  --el-box-shadow-light: 0 1px 2px var(--color-shadow);
+  --el-box-shadow-dark: 0 4px 8px var(--color-shadow-dark);
+}
+
+/* Dark Theme Styles */
+html.dark {
+  --el-color-primary: var(--color-accent);
+  --el-color-primary-light-3: var(--color-accent-light);
+  --el-color-primary-light-5: rgba(22, 160, 133, 0.15);
+  --el-color-primary-light-7: rgba(22, 160, 133, 0.1);
+  --el-color-primary-light-9: rgba(22, 160, 133, 0.05);
+  --el-bg-color: var(--color-background);
+  --el-bg-color-overlay: var(--color-card);
+  --el-text-color-primary: var(--color-text);
+  --el-text-color-regular: var(--color-text);
+  --el-text-color-secondary: var(--color-text-muted);
+  --el-border-color: var(--color-border);
+  --el-border-color-light: var(--color-border);
+  --el-border-color-lighter: var(--color-border);
+  --el-fill-color: var(--color-background);
+  --el-fill-color-light: var(--color-hover);
+  --el-fill-color-blank: var(--color-card);
+  --el-box-shadow: 0 2px 4px var(--color-shadow);
+  --el-box-shadow-light: 0 1px 2px var(--color-shadow);
+  --el-box-shadow-dark: 0 4px 8px var(--color-shadow-dark);
+}
+
+/* Adjust Element Plus components for dark mode */
+html.dark .el-button--primary {
+  --el-button-bg-color: var(--color-accent);
+  --el-button-border-color: var(--color-accent);
+  --el-button-hover-bg-color: var(--color-accent-light);
+  --el-button-hover-border-color: var(--color-accent-light);
+  --el-button-text-color: white;
+}
+
+html.dark .el-button--default {
+  --el-button-bg-color: var(--color-card);
+  --el-button-border-color: var(--color-border);
+  --el-button-text-color: var(--color-text);
+  --el-button-hover-text-color: var(--color-text);
+  --el-button-hover-bg-color: var(--color-hover);
+  --el-button-hover-border-color: var(--color-accent);
+}
+
+html.dark .el-button--success {
+  --el-button-bg-color: var(--color-success);
+  --el-button-border-color: var(--color-success);
+  --el-button-hover-bg-color: var(--color-success);
+  --el-button-hover-border-color: var(--color-success);
+  opacity: 0.9;
+}
+
+html.dark .el-card {
+  --el-card-bg-color: var(--color-card);
+  --el-card-border-color: var(--color-border);
+  box-shadow: 0 2px 12px 0 var(--color-shadow);
+}
+
+html.dark .el-input__wrapper {
+  background-color: var(--color-background);
+  border-color: var(--color-border);
+  box-shadow: 0 0 0 1px var(--color-border) inset;
+}
+
+html.dark .el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--color-accent) inset;
+}
+
+html.dark .el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px var(--color-accent) inset;
+}
+
+html.dark .el-input__inner {
+  color: var(--color-text);
+}
+
+html.dark .el-dropdown-menu {
+  background-color: var(--color-card);
+  border-color: var(--color-border);
+  box-shadow: 0 3px 12px var(--color-shadow);
+}
+
+html.dark .el-dropdown-menu__item {
+  color: var(--color-text);
+}
+
+html.dark .el-dropdown-menu__item:hover {
+  background-color: var(--color-hover);
+}
+
+html.dark .el-table {
+  --el-table-bg-color: var(--color-card);
+  --el-table-border-color: var(--color-border);
+  --el-table-text-color: var(--color-text);
+  --el-table-header-bg-color: var(--color-primary);
+  --el-table-header-text-color: var(--color-text);
+  --el-table-row-hover-bg-color: var(--color-hover);
+}
+
+html.dark .el-table th.el-table__cell {
+  background-color: var(--color-primary);
+}
+
+html.dark .el-table--border .el-table__cell {
+  border-color: var(--color-border);
+}
+
+html.dark .el-tabs__item {
+  color: var(--color-text-muted);
+}
+
+html.dark .el-tabs__item.is-active {
+  color: var(--color-accent);
+}
+
+html.dark .el-tabs__active-bar {
+  background-color: var(--color-accent);
+}
+
+html.dark .el-dialog {
+  --el-dialog-bg-color: var(--color-card);
+  --el-dialog-border-color: var(--color-border);
+  box-shadow: 0 4px 24px var(--color-shadow-dark);
+}
+
+html.dark .el-dialog__title {
+  color: var(--color-text);
+}
+
+html.dark .el-dialog__headerbtn:hover .el-dialog__close {
+  color: var(--color-accent);
+}
+
+html.dark .el-form-item__label {
+  color: var(--color-text);
+}
+
+html.dark .el-select-dropdown {
+  background-color: var(--color-card);
+  border-color: var(--color-border);
+}
+
+html.dark .el-select-dropdown__item {
+  color: var(--color-text);
+}
+
+html.dark .el-select-dropdown__item.hover, 
+html.dark .el-select-dropdown__item:hover {
+  background-color: var(--color-hover);
+}
+
+html.dark .el-pagination button:disabled {
+  background-color: var(--color-background);
+  color: var(--color-text-muted);
+}
+
+html.dark .el-pagination button {
+  background-color: var(--color-card);
+  color: var(--color-text);
+}
+
+html.dark .el-pagination .el-input__wrapper {
+  background-color: var(--color-card);
+}
+
+html.dark .el-step__title.is-process {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+html.dark .el-step__title.is-wait {
+  color: var(--color-text-muted);
+}
+
+html.dark .el-step__head.is-process {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+html.dark .el-step__icon.is-text {
+  border-color: var(--color-accent);
+  background-color: var(--color-card);
+}

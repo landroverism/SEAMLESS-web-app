@@ -1,17 +1,17 @@
 <template>
   <div class="admin-layout">
     <!-- Mobile Header with Menu Toggle -->
-    <div class="mobile-admin-header md:hidden flex items-center justify-between p-4 bg-white border-b shadow-sm">
-      <h1 class="text-xl font-bold text-primary">Tailorly Admin</h1>
+    <div class="mobile-admin-header md:hidden flex items-center justify-between p-4 bg-[#1E293B] border-b border-[#334155] shadow-md">
+      <h1 class="text-xl font-bold text-white flex items-center gap-2"><scissors-icon :size="20" class="text-[#FF5722]" /> Tailorly Admin</h1>
       <button 
         class="menu-toggle-btn"
         @click="toggleSidebar"
         aria-label="Toggle menu"
       >
         <div class="hamburger" :class="{ 'is-active': sidebarOpen }">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span class="bg-white"></span>
+          <span class="bg-white"></span>
+          <span class="bg-white"></span>
         </div>
       </button>
     </div>
@@ -21,37 +21,37 @@
       class="admin-sidebar"
       :class="{ 'open': sidebarOpen }"
     >
-      <div class="sidebar-header hidden md:flex items-center p-4 border-b">
-        <div class="flex items-center">
-          <span class="text-yellow-500 mr-2">✂️</span>
-          <h1 class="text-xl font-bold">Tailorly Admin</h1>
+      <div class="sidebar-header hidden md:flex items-center p-5 border-b border-[#334155] bg-[#1A237E]">
+        <div class="flex items-center gap-2">
+          <scissors-icon :size="22" class="text-[#FF5722]" />
+          <h1 class="text-xl font-bold text-white">Tailorly Admin</h1>
         </div>
       </div>
       
-      <div class="sidebar-content py-4">
-        <ul class="space-y-1">
+      <div class="sidebar-content py-6">
+        <ul class="space-y-2">
           <li v-for="item in menuItems" :key="item.id">
             <a 
               href="#" 
-              class="sidebar-link flex items-center p-3 mx-2 rounded-md transition-colors"
-              :class="{ 'active': activeSection === item.id }"
+              class="sidebar-link flex items-center p-3 mx-3 rounded-md transition-all duration-200 hover:bg-[#334155] hover:text-white"
+              :class="{ 'active bg-[#1A237E] text-white hover:bg-[#283593] hover:text-white': activeSection === item.id }"
               @click.prevent="showSection(item.id)"
             >
-              <el-icon class="mr-3"><component :is="item.icon" /></el-icon>
-              <span>{{ item.name }}</span>
+              <el-icon class="mr-3 text-accent"><component :is="item.icon" /></el-icon>
+              <span class="font-medium">{{ item.name }}</span>
             </a>
           </li>
         </ul>
       </div>
       
       <!-- Logout Button -->
-      <div class="sidebar-footer p-4 border-t mt-auto">
+      <div class="sidebar-footer p-4 border-t border-[#334155] mt-auto">
         <button 
-          class="logout-btn flex items-center justify-center w-full p-3 rounded-md bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+          class="logout-btn flex items-center justify-center w-full p-3 rounded-md bg-[#FF5722] text-white hover:bg-[#F4511E] transition-all duration-200 shadow-md"
           @click="logout"
         >
           <el-icon class="mr-2"><SwitchButton /></el-icon>
-          <span>Logout</span>
+          <span class="font-medium">Logout</span>
         </button>
       </div>
     </aside>
@@ -187,32 +187,38 @@ onUnmounted(() => {
 
 .admin-sidebar {
   width: 250px;
-  background-color: white;
-  border-right: 1px solid #eaeaea;
+  background-color: #1E293B;
+  border-right: 1px solid #334155;
   height: 100vh;
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .admin-content {
   flex: 1;
   padding: 2rem;
-  background-color: #f9fafb;
+  background-color: #0F172A;
+  color: #E2E8F0;
 }
 
 .sidebar-link {
-  color: #4b5563;
+  color: #CBD5E1;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
 }
 
 .sidebar-link:hover {
-  background-color: #f3f4f6;
+  background-color: #334155;
+  color: #F8FAFC;
 }
 
 .sidebar-link.active {
-  background-color: #e5e7eb;
-  color: #2C3E50;
-  font-weight: 500;
+  background-color: #1A237E;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Mobile styles */
@@ -296,7 +302,7 @@ onUnmounted(() => {
     position: absolute;
     height: 3px;
     width: 100%;
-    background: #2c3e50;
+    background: white;
     border-radius: 3px;
     opacity: 1;
     left: 0;

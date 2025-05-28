@@ -1,17 +1,17 @@
 <template>
   <div class="container mx-auto px-4 py-12">
     <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6 text-[#2C3E50]">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-[#1A237E] bg-clip-text text-transparent drop-shadow-sm">
         Custom Tailoring, Simplified
       </h1>
-      <p class="text-xl text-gray-600 mb-8">
+      <p class="text-xl text-accent font-medium mb-8 max-w-2xl mx-auto">
         Get perfectly fitted garments from expert tailors, all from the comfort of your home
       </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <el-button type="primary" size="large">
+        <el-button class="!bg-[#1A237E] !border-[#1A237E] hover:!bg-[#283593] hover:!border-[#283593] !text-white shadow-md" size="large">
           Get Started
         </el-button>
-        <el-button size="large">
+        <el-button class="!border-[#1A237E] !text-[#1A237E] hover:!bg-[#1A237E] hover:!text-white shadow-md" size="large">
           Learn More
         </el-button>
       </div>
@@ -26,17 +26,17 @@
         :md="8"
       >
         <el-card 
-          class="feature-card h-full"
+          class="feature-card h-full shadow-md hover:shadow-lg transition-shadow duration-300"
           :body-style="{ padding: '2rem' }"
         >
           <div class="text-center">
             <component 
               :is="feature.icon" 
-              class="text-[#2ecc71] mb-4"
+              class="text-accent mb-4"
               :size="32"
             />
-            <h3 class="text-xl font-bold mb-2">{{ feature.title }}</h3>
-            <p class="text-gray-600">{{ feature.description }}</p>
+            <h3 class="text-xl font-bold mb-2 text-primary">{{ feature.title }}</h3>
+            <p class="text-text-muted font-medium">{{ feature.description }}</p>
           </div>
         </el-card>
       </el-col>

@@ -249,7 +249,8 @@
 
 <script setup>
 import { ref, computed, onMounted, reactive } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { ElMessageBox } from 'element-plus';
+import notificationService from '@/services/notification.service';
 import { 
   PackageIcon, 
   AlertTriangleIcon, 
@@ -351,7 +352,7 @@ async function fetchInventory() {
     }
   } catch (error) {
     console.error('Error fetching inventory:', error);
-    ElMessage.error('Failed to load inventory. Please try again.');
+    notificationService.error('Failed to load inventory. Please try again.', 3000);
   } finally {
     tableLoading.value = false;
   }
@@ -386,7 +387,7 @@ async function fetchInventoryStats() {
     }
   } catch (error) {
     console.error('Error fetching inventory stats:', error);
-    ElMessage.error('Failed to load inventory statistics.');
+    notificationService.error('Failed to load inventory statistics.', 3000);
   } finally {
     overviewLoading.value = false;
   }
@@ -479,10 +480,11 @@ async function submitMaterialForm() {
     }
     
     if (response.data.success) {
-      ElMessage.success(
+      notificationService.success(
         isEditMode.value 
           ? 'Material updated successfully' 
-          : 'Material added successfully'
+          : 'Material added successfully',
+        3000
       );
       materialFormVisible.value = false;
       
@@ -494,10 +496,10 @@ async function submitMaterialForm() {
     }
   } catch (error) {
     if (error.message) {
-      ElMessage.error(error.message);
+      notificationService.error(error.message, 3000);
     } else {
       console.error('Error submitting material form:', error);
-      ElMessage.error('Failed to save material. Please try again.');
+      notificationService.error('Failed to save material. Please try again.', 3000);
     }
   } finally {
     formLoading.value = false;
@@ -516,7 +518,7 @@ async function confirmStockUpdate() {
     updateLoading.value = true;
     
     if (!selectedMaterial.value) {
-      ElMessage.error('No material selected');
+      notificationService.error('No material selected', 3000);
       return;
     }
     
@@ -527,7 +529,7 @@ async function confirmStockUpdate() {
     );
     
     if (response.data.success) {
-      ElMessage.success('Stock updated successfully');
+      notificationService.success('Stock updated successfully', 3000);
       stockUpdateVisible.value = false;
       
       // Refresh the inventory list and stats
@@ -538,7 +540,7 @@ async function confirmStockUpdate() {
     }
   } catch (error) {
     console.error('Error updating stock:', error);
-    ElMessage.error('Failed to update stock. Please try again.');
+    notificationService.error('Failed to update stock. Please try again.', 3000);
   } finally {
     updateLoading.value = false;
   }
@@ -559,7 +561,7 @@ async function deleteMaterial(material) {
     const response = await inventoryService.deleteInventoryItem(material.id);
     
     if (response.data.success) {
-      ElMessage.success('Material deleted successfully');
+      notificationService.success('Material deleted successfully', 3000);
       
       // Refresh the inventory list and stats
       await Promise.all([
@@ -570,7 +572,7 @@ async function deleteMaterial(material) {
   } catch (error) {
     if (error !== 'cancel') {
       console.error('Error deleting material:', error);
-      ElMessage.error('Failed to delete material. Please try again.');
+      notificationService.error('Failed to delete material. Please try again.', 3000);
     }
   }
 }

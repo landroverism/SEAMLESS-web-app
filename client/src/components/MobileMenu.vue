@@ -1,20 +1,28 @@
 <template>
-  <div class="mobile-navigation">
-    <!-- Stylish mobile menu button -->
-    <button 
-      class="mobile-menu-button"
-      @click="toggleMenu"
-      aria-label="Toggle menu"
-    >
-      <span class="sr-only">Menu</span>
-      <div class="hamburger-icon" :class="{ 'is-active': isMenuOpen }">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </button>
+  <div class="mobile-navigation fixed top-0 left-0 w-full z-50 p-4 flex justify-between items-center bg-background shadow-md md:!hidden">
+    <!-- Tailorly Logo for mobile -->
+    <router-link to="/" class="flex items-center gap-2 text-xl font-bold text-primary">
+      <scissors-icon :size="24" class="text-accent" />
+      <span class="text-accent text-lg font-black">Tailorly</span>
+    </router-link>
     
-    <!-- Mobile slide-in menu -->
+    <!-- Mobile controls: hamburger menu only -->
+    <div class="mobile-header-controls">
+      <button 
+        class="mobile-menu-button bg-accent hover:bg-accent-light rounded-full w-10 h-10 flex items-center justify-center shadow-md transition-all duration-300"
+        @click="toggleMenu"
+        aria-label="Toggle menu"
+      >
+        <span class="sr-only">Menu</span>
+        <div class="hamburger-icon" :class="{ 'is-active': isMenuOpen }">
+          <span class="bg-white"></span>
+          <span class="bg-white"></span>
+          <span class="bg-white"></span>
+        </div>
+      </button>
+    </div>
+    
+    <!-- Mobile slide-in menu with backdrop blur -->
     <div 
       class="mobile-menu"
       :class="{ 'is-active': isMenuOpen }"
@@ -25,24 +33,50 @@
         :class="{ 'is-active': isMenuOpen }"
         @click.stop
       >
-        <div class="p-4 border-b">
-          <h2 class="text-xl font-bold">Tailorly</h2>
+        <div class="menu-header">
+          <h2 class="menu-title">Tailorly</h2>
+          <button @click="closeMenu" class="close-button" aria-label="Close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </div>
         
-        <nav class="py-4">
+        <nav class="menu-nav">
           <ul>
-            <li v-for="item in menuItems" :key="item.path" class="mobile-menu-item">
+            <li v-for="item in menuItems" :key="item.path" class="menu-item">
               <router-link 
                 :to="item.path" 
-                class="block py-3 px-4 hover:bg-gray-100 transition-colors"
+                class="menu-link"
                 @click="closeMenu"
+                active-class="active"
               >
-                <span class="menu-icon mr-3">
-                  <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
-                </span>
-                {{ item.name }}
+                <span class="menu-text">{{ item.label }}</span>
               </router-link>
             </li>
+            
+            <!-- Auth buttons when not authenticated -->
+            <template v-if="!isAuthenticated">
+              <li class="menu-item">
+                <router-link 
+                  to="/login" 
+                  class="menu-link"
+                  @click="closeMenu"
+                >
+                  <span class="menu-text">Sign In</span>
+                </router-link>
+              </li>
+              <li class="menu-item">
+                <router-link 
+                  to="/register" 
+                  class="menu-link cta-link"
+                  @click="closeMenu"
+                >
+                  <span class="menu-text">Get Started</span>
+                </router-link>
+              </li>
+            </template>
           </ul>
         </nav>
       </div>
@@ -51,96 +85,253 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '../stores/user'; // Assuming you have a user store
+import authService from '../services/auth.service';
 
 const router = useRouter();
-const userStore = useUserStore();
-
 const isMenuOpen = ref(false);
+const isAuthenticated = ref(false);
 
-const toggleMenu = () => {
+// Menu items
+const menuItems = [
+  { label: 'Home', path: '/' },
+  { label: 'Measurements', path: '/measurements' },
+  { label: 'Find Tailors', path: '/tailors' },
+  { label: 'About Us', path: '/about' }
+];
+
+// Toggle menu open/close
+function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
-  if (isMenuOpen.value) {
-    document.body.classList.add('overflow-hidden');
-  } else {
-    document.body.classList.remove('overflow-hidden');
-  }
-};
+  document.body.style.overflow = isMenuOpen.value ? 'hidden' : '';
+}
 
-const closeMenu = () => {
+// Close menu
+function closeMenu() {
   isMenuOpen.value = false;
-  document.body.classList.remove('overflow-hidden');
-};
+  document.body.style.overflow = '';
+}
 
-// Determine menu items based on user role
-const isAdmin = computed(() => {
-  const user = userStore.user;
-  return user && user.isAdmin;
+// Check authentication status on mount
+onMounted(() => {
+  checkAuth();
 });
 
-const menuItems = computed(() => {
-  // Common menu items for all users
-  const items = [
-    { name: 'Home', path: '/', icon: 'House' },
-    { name: 'Measurements', path: '/measurements', icon: 'Ruler' },
-    { name: 'Tailors', path: '/tailors', icon: 'User' },
-  ];
-
-  // Add auth-related items
-  if (userStore.user) {
-    // User is logged in
-    if (isAdmin.value) {
-      // Admin-specific menu items
-      items.push(
-        { name: 'Dashboard', path: '/admin/dashboard', icon: 'DataAnalysis' },
-        { name: 'Orders', path: '/admin/orders', icon: 'List' },
-        { name: 'Clients', path: '/admin/clients', icon: 'UserFilled' },
-        { name: 'Settings', path: '/admin/settings', icon: 'Setting' }
-      );
-    } else {
-      // Regular user menu items
-      items.push(
-        { name: 'My Profile', path: '/profile', icon: 'User' },
-        { name: 'My Orders', path: '/orders', icon: 'List' }
-      );
-    }
-    
-    // Add logout option
-    items.push({ 
-      name: 'Logout', 
-      path: '/logout', 
-      icon: 'SwitchButton',
-      action: () => {
-        userStore.logout();
-        router.push('/login');
-        closeMenu();
-      }
-    });
-  } else {
-    // User is not logged in
-    items.push(
-      { name: 'Login', path: '/login', icon: 'Key' },
-      { name: 'Register', path: '/register', icon: 'Plus' }
-    );
+// Check authentication status
+async function checkAuth() {
+  try {
+    const authState = await authService.getAuthState();
+    isAuthenticated.value = authState.isAuthenticated;
+  } catch (error) {
+    console.error('Auth check error:', error);
+    isAuthenticated.value = false;
   }
-  
-  return items;
-});
+}
 </script>
 
 <style scoped>
-/* Mobile menu styles are imported from mobile-responsive.css */
-.sr-only {
+.mobile-navigation {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 50;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mobile-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Enhanced mobile menu button styles */
+.mobile-menu-button {
+  position: relative;
+  z-index: 50;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-menu-button:hover {
+  background-color: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hamburger-icon {
+  width: 18px;
+  height: 14px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: 0.5s ease-in-out;
+}
+
+.hamburger-icon span {
+  display: block;
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--color-text-muted);
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+  background-color: #F5EFE7;
+}
+
+.hamburger-icon span:nth-child(1) {
+  top: 0px;
+}
+
+.hamburger-icon span:nth-child(2) {
+  top: 6px;
+}
+
+.hamburger-icon span:nth-child(3) {
+  top: 12px;
+}
+
+.hamburger-icon.is-active span:nth-child(1) {
+  top: 6px;
+  transform: rotate(135deg);
+}
+
+.hamburger-icon.is-active span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.hamburger-icon.is-active span:nth-child(3) {
+  top: 6px;
+  transform: rotate(-135deg);
+}
+
+/* Mobile menu styling */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-content {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 280px;
+  height: 100%;
+  background-color: var(--color-card);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  z-index: 45;
+}
+
+.menu-content.is-active {
+  right: 0;
+}
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.menu-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.close-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-hover);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: var(--color-border);
+}
+
+.menu-nav {
+  padding: 1rem 0;
+}
+
+.menu-item {
+  margin: 0.25rem 0;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.menu-link:hover, .menu-link.active {
+  background-color: var(--color-hover);
+  color: var(--color-primary);
+}
+
+.menu-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.cta-link {
+  margin: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: white !important;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 2px 4px var(--color-shadow);
+  transition: all 0.3s ease;
+}
+
+.cta-link:hover {
+  background-color: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px var(--color-shadow);
 }
 </style>

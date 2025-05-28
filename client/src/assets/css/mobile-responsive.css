@@ -149,31 +149,46 @@
 }
 
 /* Mobile Navigation Menu */
+/* Clear rules to prevent conflicts */
 .mobile-menu-button {
   display: none;
 }
 
-@media (max-width: 768px) {
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  /* Mobile menu visibility controlled by Tailwind classes in App.vue */
+  
   .mobile-menu-button {
     display: block;
     position: fixed;
     top: 1rem;
     right: 1rem;
     z-index: 50;
-    padding: 0.5rem;
-    background-color: white;
+    padding: 0.75rem;
+    background-color: #2C3E50;
     border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     border: none;
     outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
   }
   
-  .desktop-nav {
-    display: none !important;
+  .mobile-menu-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    background-color: #34495E;
   }
   
-  /* Hamburger icon */
-  .hamburger {
+  .mobile-menu-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Mobile menu styling */
+  
+  /* Modern Hamburger icon */
+  .hamburger-icon {
     width: 24px;
     height: 20px;
     position: relative;
@@ -181,58 +196,61 @@
     transition: .5s ease-in-out;
   }
   
-  .hamburger span {
+  .hamburger-icon span {
     display: block;
     position: absolute;
-    height: 3px;
+    height: 2px;
     width: 100%;
-    background: #2c3e50;
-    border-radius: 3px;
+    background: #ffffff;
+    border-radius: 2px;
     opacity: 1;
     left: 0;
     transform: rotate(0deg);
     transition: .25s ease-in-out;
   }
   
-  .hamburger span:nth-child(1) {
+  .hamburger-icon span:nth-child(1) {
     top: 0px;
   }
   
-  .hamburger span:nth-child(2) {
-    top: 8px;
+  .hamburger-icon span:nth-child(2) {
+    top: 9px;
+    width: 70%;
   }
   
-  .hamburger span:nth-child(3) {
-    top: 16px;
+  .hamburger-icon span:nth-child(3) {
+    top: 18px;
   }
   
-  .hamburger.is-active span:nth-child(1) {
-    top: 8px;
-    transform: rotate(135deg);
+  .hamburger-icon.is-active span:nth-child(1) {
+    top: 9px;
+    transform: rotate(45deg);
   }
   
-  .hamburger.is-active span:nth-child(2) {
+  .hamburger-icon.is-active span:nth-child(2) {
     opacity: 0;
-    left: -60px;
+    width: 0;
   }
   
-  .hamburger.is-active span:nth-child(3) {
-    top: 8px;
-    transform: rotate(-135deg);
+  .hamburger-icon.is-active span:nth-child(3) {
+    top: 9px;
+    transform: rotate(-45deg);
   }
   
-  /* Mobile slide-in menu */
+  /* Modern mobile slide-in menu */
   .mobile-menu {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 40;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .mobile-menu.is-active {
@@ -243,10 +261,11 @@
   .menu-content {
     background-color: white;
     height: 100%;
-    width: 80%;
-    max-width: 300px;
+    width: 85%;
+    max-width: 320px;
     transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
   }
   
   .menu-content.is-active {

@@ -1,13 +1,13 @@
 <template>
-  <footer class="bg-primary text-white py-12">
+  <footer class="bg-[#1A237E] text-white py-12 border-t border-accent/20">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-            <scissors-icon :size="24" class="text-highlight" />
+            <scissors-icon :size="24" class="text-accent" />
             Tailorly
           </h3>
-          <p class="text-sm text-secondary/80 mb-6">
+          <p class="text-sm text-white/90 mb-6">
             Revolutionizing the tailoring industry through technology and connecting customers with expert tailors worldwide.
           </p>
           <div class="flex gap-4">
@@ -21,7 +21,7 @@
             >
               <el-button 
                 circle
-                class="social-btn !bg-primary-light hover:!bg-highlight hover:!text-primary transition-all duration-300 transform group-hover:scale-110"
+                class="social-btn !bg-accent !text-white hover:!bg-accent-light hover:!text-white transition-all duration-300 transform group-hover:scale-110 shadow-md"
               >
                 <component :is="icon.component" :size="18" />
               </el-button>
@@ -36,7 +36,7 @@
               v-for="link in quickLinks"
               :key="link.path"
               :to="link.path"
-              class="text-sm text-secondary/80 hover:text-highlight transition-colors flex items-center gap-2"
+              class="text-sm text-white hover:text-accent-light transition-colors flex items-center gap-2 py-1"
             >
               <component :is="link.icon" :size="16" />
               {{ link.label }}
@@ -117,7 +117,7 @@ const socialIcons = [
   { 
     name: 'twitter', 
     component: TwitterIcon,
-    link: 'https://twitter.com'
+    link: 'https://twitter.com/hamkemboi/'
   },
   { 
     name: 'instagram', 

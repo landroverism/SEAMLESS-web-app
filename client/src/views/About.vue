@@ -105,7 +105,7 @@
 
       <!-- Team Section -->
       <div class="mt-16">
-        <h2 class="text-2xl font-bold mb-8 text-center text-primary">Meet Our Team</h2>
+        <h2 class="text-2xl font-bold mb-8 text-center text-[#1A237E]">Meet Our Team</h2>
         <div class="grid md:grid-cols-3 gap-8">
           <div 
             v-for="member in teamMembers" 
@@ -121,9 +121,9 @@
               />
               <div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
             </div>
-            <h3 class="text-lg font-bold text-primary mb-1">{{ member.name }}</h3>
-            <p class="text-gray-600 mb-2">{{ member.role }}</p>
-            <p class="text-sm text-gray-500">{{ member.description }}</p>
+            <h3 class="text-lg font-bold text-[#1A237E] mb-1">{{ member.name }}</h3>
+            <p class="text-accent font-medium mb-2">{{ member.role }}</p>
+            <p class="text-text-muted font-medium">{{ member.description }}</p>
           </div>
         </div>
       </div>

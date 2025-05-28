@@ -1,10 +1,10 @@
 <template>
   <div class="admin-dashboard">
     <!-- Dashboard Header -->
-    <div class="dashboard-header flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold">Dashboard</h2>
+    <div class="dashboard-header flex justify-between items-center mb-8">
+      <h2 class="text-2xl font-bold bg-gradient-to-r from-[#2196F3] to-[#1A237E] bg-clip-text text-transparent drop-shadow-sm">Dashboard</h2>
       <div class="actions flex flex-wrap items-center gap-4">
-        <el-select v-model="timeRange" placeholder="Time Range" size="small" class="mobile-full-width">
+        <el-select v-model="timeRange" placeholder="Time Range" size="small" class="mobile-full-width !bg-[#1E293B] !text-white !border-[#334155]">
           <el-option label="Last 7 days" value="7days" />
           <el-option label="Last 30 days" value="30days" />
           <el-option label="Last 90 days" value="90days" />
@@ -14,65 +14,65 @@
     </div>
           <!-- Overview Cards -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <el-card shadow="hover" class="overview-card">
+            <el-card shadow="hover" class="overview-card !bg-[#1E293B] !border-[#334155] !rounded-xl">
               <div class="flex items-center gap-4">
-                <div class="p-3 rounded-full bg-blue-100">
-                  <clipboard-list-icon :size="24" class="text-blue-500" />
+                <div class="p-3 rounded-full bg-[#2196F3]/20">
+                  <clipboard-list-icon :size="24" class="text-[#2196F3]" />
                 </div>
                 <div>
-                  <p class="text-gray-500 text-sm">Total Orders</p>
-                  <h3 class="text-2xl font-bold">{{ totalOrders }}</h3>
+                  <p class="text-[#FF5722] font-medium text-sm">Total Orders</p>
+                  <h3 class="text-2xl font-bold text-white">{{ totalOrders }}</h3>
                 </div>
               </div>
-              <div class="mt-4 text-sm text-green-500 flex items-center">
+              <div class="mt-4 text-sm text-green-400 flex items-center">
                 <arrow-up-icon :size="16" class="mr-1" />
                 <span>+12% from last month</span>
               </div>
             </el-card>
             
-            <el-card shadow="hover" class="overview-card">
+            <el-card shadow="hover" class="overview-card !bg-[#1E293B] !border-[#334155] !rounded-xl">
               <div class="flex items-center gap-4">
-                <div class="p-3 rounded-full bg-green-100">
-                  <UsersIcon :size="24" class="text-green-500" />
+                <div class="p-3 rounded-full bg-[#4CAF50]/20">
+                  <UsersIcon :size="24" class="text-[#4CAF50]" />
                 </div>
                 <div>
-                  <p class="text-gray-500 text-sm">Active Clients</p>
-                  <h3 class="text-2xl font-bold">{{ activeClients }}</h3>
+                  <p class="text-[#FF5722] font-medium text-sm">Active Clients</p>
+                  <h3 class="text-2xl font-bold text-white">{{ activeClients }}</h3>
                 </div>
               </div>
-              <div class="mt-4 text-sm text-green-500 flex items-center">
+              <div class="mt-4 text-sm text-green-400 flex items-center">
                 <arrow-up-icon :size="16" class="mr-1" />
                 <span>+5% from last month</span>
               </div>
             </el-card>
             
-            <el-card shadow="hover" class="overview-card">
+            <el-card shadow="hover" class="overview-card !bg-[#1E293B] !border-[#334155] !rounded-xl">
               <div class="flex items-center gap-4">
-                <div class="p-3 rounded-full bg-amber-100">
-                  <clock-icon :size="24" class="text-amber-500" />
+                <div class="p-3 rounded-full bg-[#FFC107]/20">
+                  <clock-icon :size="24" class="text-[#FFC107]" />
                 </div>
                 <div>
-                  <p class="text-gray-500 text-sm">Pending Orders</p>
-                  <h3 class="text-2xl font-bold">{{ pendingOrders }}</h3>
+                  <p class="text-[#FF5722] font-medium text-sm">Pending Orders</p>
+                  <h3 class="text-2xl font-bold text-white">{{ pendingOrders }}</h3>
                 </div>
               </div>
-              <div class="mt-4 text-sm text-amber-500 flex items-center">
+              <div class="mt-4 text-sm text-amber-400 flex items-center">
                 <alert-circle-icon :size="16" class="mr-1" />
                 <span>2 orders due today</span>
               </div>
             </el-card>
             
-            <el-card shadow="hover" class="overview-card">
+            <el-card shadow="hover" class="overview-card !bg-[#1E293B] !border-[#334155] !rounded-xl">
               <div class="flex items-center gap-4">
-                <div class="p-3 rounded-full bg-purple-100">
-                  <dollar-sign-icon :size="24" class="text-purple-500" />
+                <div class="p-3 rounded-full bg-[#9C27B0]/20">
+                  <dollar-sign-icon :size="24" class="text-[#9C27B0]" />
                 </div>
                 <div>
-                  <p class="text-gray-500 text-sm">Revenue</p>
-                  <h3 class="text-2xl font-bold"><CurrencyFormatter :amount="revenue" :currency="currentCurrency" /></h3>
+                  <p class="text-[#FF5722] font-medium text-sm">Revenue</p>
+                  <h3 class="text-2xl font-bold text-white"><CurrencyFormatter :amount="revenue" :currency="currentCurrency" /></h3>
                 </div>
               </div>
-              <div class="mt-4 text-sm text-green-500 flex items-center">
+              <div class="mt-4 text-sm text-green-400 flex items-center">
                 <arrow-up-icon :size="16" class="mr-1" />
                 <span>+8% from last month</span>
               </div>
@@ -81,11 +81,11 @@
           
           <!-- Service Order Management -->
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <el-card shadow="hover" class="col-span-2">
+            <el-card shadow="hover" class="col-span-2 !bg-[#1E293B] !border-[#334155] !rounded-xl">
               <template #header>
-                <div class="flex items-center justify-between">
-                  <h3 class="text-lg font-bold text-primary">Service Orders by Type</h3>
-                  <el-select v-model="timeRange" placeholder="Select" size="small">
+                <div class="flex items-center justify-between !bg-[#1E293B] !border-b-[#334155] py-2">
+                  <h3 class="text-lg font-bold text-[#2196F3]">Service Orders by Type</h3>
+                  <el-select v-model="timeRange" placeholder="Select" size="small" class="!bg-[#1E293B] !text-white !border-[#334155]">
                     <el-option label="Last 7 days" value="7days" />
                     <el-option label="Last 30 days" value="30days" />
                     <el-option label="Last 90 days" value="90days" />
@@ -99,10 +99,10 @@
               </div>
             </el-card>
             
-            <el-card shadow="hover">
+            <el-card shadow="hover" class="!bg-[#1E293B] !border-[#334155] !rounded-xl">
               <template #header>
-                <div class="flex items-center justify-between">
-                  <h3 class="text-lg font-bold text-primary">Order Status</h3>
+                <div class="flex items-center justify-between !bg-[#1E293B] !border-b-[#334155] py-2">
+                  <h3 class="text-lg font-bold text-[#2196F3]">Order Status</h3>
                 </div>
               </template>
               
@@ -114,15 +114,21 @@
           </div>
           
           <!-- Recent Orders -->
-          <el-card shadow="hover" class="mb-8">
+          <el-card shadow="hover" class="mb-8 !bg-[#1E293B] !border-[#334155] !rounded-xl">
             <template #header>
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-bold text-primary">Recent Orders</h3>
-                <el-button type="primary" plain size="small">View All</el-button>
+              <div class="flex items-center justify-between !bg-[#1E293B] !border-b-[#334155] py-2">
+                <h3 class="text-lg font-bold text-[#2196F3]">Recent Orders</h3>
+                <el-button class="!bg-[#1A237E] !border-[#1A237E] hover:!bg-[#283593] hover:!border-[#283593] !text-white !rounded-lg" size="small">View All</el-button>
               </div>
             </template>
             
-            <el-table :data="recentOrders" style="width: 100%">
+            <el-table 
+              :data="recentOrders" 
+              style="width: 100%" 
+              class="!bg-[#1E293B] !border-none" 
+              :header-cell-style="{ backgroundColor: '#263238', color: '#E2E8F0', fontWeight: 'bold' }"
+              :cell-style="{ backgroundColor: '#1E293B', color: '#E2E8F0', borderBottom: '1px solid #334155' }"
+            >
               <el-table-column prop="id" label="Order ID" width="100" />
               <el-table-column prop="client" label="Client" width="180" />
               <el-table-column prop="service" label="Service Type" />
@@ -130,7 +136,7 @@
               <el-table-column prop="dueDate" label="Due Date" width="150" />
               <el-table-column prop="status" label="Status" width="120">
                 <template #default="scope">
-                  <el-tag :type="getStatusType(scope.row.status)" size="small">
+                  <el-tag :type="getStatusType(scope.row.status)" size="small" class="!font-medium">
                     {{ scope.row.status }}
                   </el-tag>
                 </template>
@@ -138,10 +144,10 @@
               <el-table-column label="Actions" width="120">
                 <template #default="scope">
                   <el-button-group>
-                    <el-button type="primary" size="small" plain>
+                    <el-button class="!bg-[#1A237E]/20 !border-[#1A237E] !text-[#2196F3]" size="small">
                       <eye-icon :size="16" />
                     </el-button>
-                    <el-button type="success" size="small" plain>
+                    <el-button class="!bg-[#2E7D32]/20 !border-[#2E7D32] !text-[#4CAF50]" size="small">
                       <message-square-icon :size="16" />
                     </el-button>
                   </el-button-group>
@@ -151,25 +157,25 @@
           </el-card>
           
           <!-- Client Feedback -->
-          <el-card shadow="hover">
+          <el-card shadow="hover" class="!bg-[#1E293B] !border-[#334155] !rounded-xl">
             <template #header>
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-bold text-primary">Recent Client Feedback</h3>
-                <el-button type="primary" plain size="small">View All</el-button>
+              <div class="flex items-center justify-between !bg-[#1E293B] !border-b-[#334155] py-2">
+                <h3 class="text-lg font-bold text-[#2196F3]">Recent Client Feedback</h3>
+                <el-button class="!bg-[#1A237E] !border-[#1A237E] hover:!bg-[#283593] hover:!border-[#283593] !text-white !rounded-lg" size="small">View All</el-button>
               </div>
             </template>
             
             <div class="space-y-4">
-              <div v-for="(feedback, index) in recentFeedback" :key="index" class="p-4 border rounded-lg">
+              <div v-for="(feedback, index) in recentFeedback" :key="index" class="p-4 border border-[#334155] rounded-lg bg-[#263238]">
                 <div class="flex items-start gap-4">
                   <el-avatar :size="40" :src="feedback.clientAvatar" />
                   <div class="flex-1">
                     <div class="flex items-center justify-between mb-2">
-                      <h4 class="font-bold text-gray-800">{{ feedback.clientName }}</h4>
-                      <el-rate v-model="feedback.rating" disabled text-color="#ff9900" />
+                      <h4 class="font-bold text-white">{{ feedback.clientName }}</h4>
+                      <el-rate v-model="feedback.rating" disabled text-color="#FF5722" />
                     </div>
-                    <p class="text-gray-600 mb-2">{{ feedback.comment }}</p>
-                    <div class="flex items-center justify-between text-sm text-gray-500">
+                    <p class="text-gray-300 mb-2">{{ feedback.comment }}</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
                       <span>{{ feedback.date }}</span>
                       <span>Order #{{ feedback.orderId }}</span>
                     </div>

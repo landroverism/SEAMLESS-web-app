@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto px-4 py-12">
     <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold mb-4 text-[#2C3E50]">Our Expert Tailors</h1>
-      <p class="text-xl text-gray-600">Connect with skilled professionals for your custom garments</p>
+      <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-[#1A237E] bg-clip-text text-transparent drop-shadow-sm">Our Expert Tailors</h1>
+      <p class="text-xl text-accent font-medium">Connect with skilled professionals for your custom garments</p>
     </div>
 
     <el-row :gutter="24">
@@ -31,11 +31,10 @@
           </el-image>
 
           <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">{{ tailor.name }}</h3>
+            <h3 class="text-xl font-bold mb-2 text-[#1A237E]">{{ tailor.name }}</h3>
             
             <el-tag 
-              type="success"
-              class="mb-3"
+              class="mb-3 !bg-accent/10 !text-accent !border-accent/20"
               effect="plain"
             >
               {{ tailor.specialty }}
@@ -48,10 +47,10 @@
                 :max="5"
                 :colors="['#2ecc71', '#2ecc71', '#2ecc71']"
               />
-              <span class="text-sm text-gray-600">({{ tailor.rating }})</span>
+              <span class="text-sm text-accent font-medium">({{ tailor.rating }})</span>
             </div>
 
-            <p class="text-gray-600 mb-4">{{ tailor.experience }} of experience</p>
+            <p class="text-text-muted font-medium mb-4">{{ tailor.experience }} of experience</p>
 
             <div class="space-y-3">
               <el-button 

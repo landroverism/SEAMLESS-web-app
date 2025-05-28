@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto px-4 py-12">
     <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold mb-4 text-[#2C3E50]">Take Your Measurements</h1>
-      <p class="text-xl text-gray-600">Follow our step-by-step guide for accurate measurements</p>
+      <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-[#1A237E] bg-clip-text text-transparent drop-shadow-sm">Take Your Measurements</h1>
+      <p class="text-xl text-accent font-medium">Follow our step-by-step guide for accurate measurements</p>
     </div>
 
     <el-steps :active="activeStep" finish-status="success" class="mb-8">
@@ -44,11 +44,11 @@
     />
 
     <el-row :gutter="24">
-      <el-col :span="12">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="mb-6 md:mb-0">
         <el-card class="measurement-card">
           <template #header>
             <div class="flex items-center justify-between">
-              <span class="text-lg font-semibold">{{ currentStep.label }}</span>
+              <span class="text-lg font-bold text-[#1A237E]">{{ currentStep.label }}</span>
               <el-tooltip
                 :content="showTips ? 'Hide Tips' : 'Show Tips'"
                 placement="top"
@@ -62,14 +62,14 @@
             </div>
           </template>
 
-          <p class="text-gray-600 mb-4">{{ currentStep.instructions }}</p>
+          <p class="text-text-muted font-medium mb-4 text-base">{{ currentStep.instructions }}</p>
 
           <el-collapse-transition>
             <div v-show="showTips" class="tips-section">
-              <div class="border-l-4 border-primary p-4 bg-primary/5 mb-4">
-                <h4 class="font-semibold mb-2">Measurement Tips:</h4>
-                <ul class="list-disc list-inside space-y-1">
-                  <li v-for="tip in currentStep.tips" :key="tip">{{ tip }}</li>
+              <div class="border-l-4 border-accent p-4 bg-accent/5 mb-4 rounded-r-md shadow-sm">
+                <h4 class="font-semibold mb-2 text-[#1A237E]">Measurement Tips:</h4>
+                <ul class="list-disc list-inside space-y-2">
+                  <li v-for="tip in currentStep.tips" :key="tip" class="text-text-muted font-medium">{{ tip }}</li>
                 </ul>
               </div>
             </div>
@@ -94,18 +94,24 @@
         </el-card>
       </el-col>
 
-      <el-col :span="12">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
         <el-card>
           <template #header>
             <div class="text-lg font-semibold">Video Tutorial</div>
           </template>
 
-          <div class="aspect-video bg-gray-100 rounded-lg mb-4">
-            <!-- Video player placeholder -->
-            <div class="h-full flex items-center justify-center text-gray-500">
-              Video tutorial for {{ currentStep.label.toLowerCase() }} measurement
-            </div>
+          <div class="aspect-video rounded-lg mb-4 overflow-hidden border border-gray-200 shadow-sm">
+            <video 
+              :src="currentStep.videoUrl" 
+              controls 
+              class="w-full h-full"
+              preload="metadata"
+              :id="`video-${currentStep.label.toLowerCase()}`"
+            >
+              Your browser does not support the video tag.
+            </video>
           </div>
+          <p class="text-sm text-gray-500 mb-2">{{ currentStep.videoTitle }}</p>
 
           <div class="flex justify-between mt-4">
             <el-button 
@@ -152,6 +158,7 @@ interface Step {
   label: string
   instructions: string
   videoUrl: string
+  videoTitle: string
   tips: string[]
   minValue: number
   maxValue: number
@@ -162,7 +169,8 @@ const steps: Step[] = [
   {
     label: 'Chest',
     instructions: 'Measure around the fullest part of your chest, keeping the tape parallel to the ground.',
-    videoUrl: 'https://example.com/chest-measurement',
+    videoUrl: '/videos/Chest Measurement.mp4',
+    videoTitle: 'How to Measure Your Chest',
     tips: [
       'Take a deep breath and measure',
       'Keep the tape snug but not tight',
@@ -175,7 +183,8 @@ const steps: Step[] = [
   {
     label: 'Waist',
     instructions: 'Measure around your natural waistline, keeping the tape comfortably loose.',
-    videoUrl: 'https://example.com/waist-measurement',
+    videoUrl: '/videos/How to Measure Your Waist _ Tux Rental Measuring Made Easy.mp4',
+    videoTitle: 'How to Measure Your Waist - Tux Rental Measuring Made Easy',
     tips: [
       'Locate your natural waistline',
       'Keep one finger between the tape and your body',
@@ -188,7 +197,8 @@ const steps: Step[] = [
   {
     label: 'Shoulders',
     instructions: 'Measure across the back from shoulder point to shoulder point.',
-    videoUrl: 'https://example.com/shoulder-measurement',
+    videoUrl: '/videos/How to Measure Your Shoulders - Fittery.mp4',
+    videoTitle: 'How to Measure Your Shoulders',
     tips: [
       'Stand naturally with arms at sides',
       'Measure from the outer edges of each shoulder',
@@ -243,15 +253,37 @@ const isCurrentStepValid = computed(() => {
 
 const nextStep = () => {
   if (activeStep.value < steps.length - 1) {
+    // Pause current video
+    const currentVideo = document.getElementById(`video-${currentStep.value.label.toLowerCase()}`) as HTMLVideoElement
+    if (currentVideo) {
+      currentVideo.pause()
+    }
+    
     activeStep.value++
     showTips.value = false
+    
+    // Reset scroll position for mobile
+    if (windowWidth.value <= 768) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 }
 
 const previousStep = () => {
   if (activeStep.value > 0) {
+    // Pause current video
+    const currentVideo = document.getElementById(`video-${currentStep.value.label.toLowerCase()}`) as HTMLVideoElement
+    if (currentVideo) {
+      currentVideo.pause()
+    }
+    
     activeStep.value--
     showTips.value = false
+    
+    // Reset scroll position for mobile
+    if (windowWidth.value <= 768) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 }
 
@@ -285,5 +317,29 @@ const resetMeasurements = () => {
 .tips-section {
   margin: -8px -20px 16px;
   padding: 0 20px;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .el-card {
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 0.5rem;
+  }
+  
+  .el-input-number {
+    width: 100% !important;
+    height: 3rem !important;
+  }
+  
+  .el-button {
+    height: 2.75rem;
+    padding: 0 1.25rem;
+    font-size: 1rem;
+  }
+  
+  video {
+    border-radius: 0.375rem;
+  }
 }
 </style>
