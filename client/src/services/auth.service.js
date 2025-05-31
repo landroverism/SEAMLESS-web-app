@@ -25,20 +25,49 @@ export default {
       const response = await api.post('/auth/login', credentials);
       
       // Store token and user data in localStorage if successful
-      if (response.data && response.data.success && response.data.data) {
+      if (response.data && response.data.success) {
         console.log('Auth service: Login successful, storing token and user data');
-        localStorage.setItem('tailorly_token', response.data.data.token);
-        localStorage.setItem('tailorly_user', JSON.stringify(response.data.data.tailor));
         
-        // Set the token in the API headers for subsequent requests
-        api.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`;
-      } else {
-        console.warn('Auth service: Login response missing expected data structure');
+        // Handle partial data response (206 status)
+        if (response.status === 206 && response.data.partialData) {
+          console.warn('Auth service: Partial data received due to network issues');
+          localStorage.setItem('tailorly_token', response.data.token);
+          localStorage.setItem('tailorly_user', JSON.stringify(response.data.user));
+          
+          // Set the token in the API headers for subsequent requests
+          api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+          
+          // Add warning flag for UI to show connectivity warning
+          response.data.connectivityWarning = true;
+        } 
+        // Handle normal successful response
+        else if (response.data.data) {
+          localStorage.setItem('tailorly_token', response.data.data.token);
+          localStorage.setItem('tailorly_user', JSON.stringify(response.data.data.tailor));
+          
+          // Set the token in the API headers for subsequent requests
+          api.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.token}`;
+        } else {
+          console.warn('Auth service: Login response missing expected data structure');
+        }
       }
       
       return response;
     } catch (error) {
       console.error('Auth service: Login error:', error);
+      
+      // Enhanced error handling for network connectivity issues
+      if (error.response?.status === 503 && error.response?.data?.isNetworkError) {
+        console.warn('Auth service: Network connectivity issue detected');
+        
+        // Create a more user-friendly error response
+        const enhancedError = new Error('Network connectivity issue');
+        enhancedError.isNetworkError = true;
+        enhancedError.userMessage = 'Cannot connect to the server. Please check your internet connection and try again.';
+        enhancedError.originalError = error;
+        throw enhancedError;
+      }
+      
       throw error;
     }
   },
@@ -48,13 +77,24 @@ export default {
    * @returns {Promise} - API response
    */
   async logout() {
-    const response = await api.post('/auth/logout');
-    
-    // Clear local storage
-    localStorage.removeItem('tailorly_token');
-    localStorage.removeItem('tailorly_user');
-    
-    return response;
+    try {
+      const response = await api.post('/auth/logout');
+      
+      // Clear local storage and auth header regardless of server response
+      localStorage.removeItem('tailorly_token');
+      localStorage.removeItem('tailorly_user');
+      delete api.defaults.headers.common['Authorization'];
+      
+      return response;
+    } catch (error) {
+      // Still clear local storage even if server request fails
+      localStorage.removeItem('tailorly_token');
+      localStorage.removeItem('tailorly_user');
+      delete api.defaults.headers.common['Authorization'];
+      
+      console.error('Auth service: Logout error:', error);
+      throw error;
+    }
   },
 
   /**

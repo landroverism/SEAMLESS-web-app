@@ -1,14 +1,14 @@
 <template>
-  <div class="settings-page">
+  <div class="settings-container settings-page">
     <div class="mb-6">
-      <h1 class="text-2xl font-bold text-primary">Account Settings</h1>
-      <p class="text-gray-500">Manage your account preferences and tailor shop settings</p>
+      <h1 class="text-2xl font-bold text-[#D4AF37]">Account Settings</h1>
+      <p class="text-[#777777]">Manage your account preferences and tailor shop settings</p>
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <!-- Sidebar Navigation -->
       <div class="col-span-1">
-        <el-card shadow="hover">
+        <el-card shadow="hover" class="settings-sidebar">
           <el-menu
             :default-active="activeSection"
             class="settings-menu"
@@ -17,7 +17,7 @@
             <el-menu-item index="profile">
               <template #title>
                 <div class="flex items-center gap-2">
-                  <user-icon :size="18" />
+                  <user-icon :size="18" class="menu-icon" />
                   <span>Profile</span>
                 </div>
               </template>
@@ -25,7 +25,7 @@
             <el-menu-item index="shop">
               <template #title>
                 <div class="flex items-center gap-2">
-                  <store-icon :size="18" />
+                  <store-icon :size="18" class="menu-icon" />
                   <span>Shop Details</span>
                 </div>
               </template>
@@ -33,7 +33,7 @@
             <el-menu-item index="notifications">
               <template #title>
                 <div class="flex items-center gap-2">
-                  <bell-icon :size="18" />
+                  <bell-icon :size="18" class="menu-icon" />
                   <span>Notifications</span>
                 </div>
               </template>
@@ -41,7 +41,7 @@
             <el-menu-item index="security">
               <template #title>
                 <div class="flex items-center gap-2">
-                  <lock-icon :size="18" />
+                  <lock-icon :size="18" class="menu-icon" />
                   <span>Security</span>
                 </div>
               </template>
@@ -49,7 +49,7 @@
             <el-menu-item index="billing">
               <template #title>
                 <div class="flex items-center gap-2">
-                  <credit-card-icon :size="18" />
+                  <credit-card-icon :size="18" class="menu-icon" />
                   <span>Billing</span>
                 </div>
               </template>
@@ -629,9 +629,114 @@ async function toggleTwoFactor() {
 <style scoped>
 .settings-page {
   padding: 1rem;
+  background-color: #FFFFFF;
+  color: #333333;
 }
 
 .settings-menu {
   border-right: none;
+}
+
+.settings-menu .el-menu-item {
+  color: #555555;
+}
+
+.settings-menu .el-menu-item:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+  color: #D4AF37;
+}
+
+.settings-menu .el-menu-item.is-active {
+  color: #D4AF37;
+  background-color: rgba(212, 175, 55, 0.1);
+}
+
+.settings-menu .menu-icon {
+  color: #777777;
+}
+
+.settings-menu .el-menu-item.is-active .menu-icon {
+  color: #D4AF37;
+}
+
+.settings-sidebar {
+  background-color: #F5F5F5;
+  border: 1px solid #E0E0E0;
+}
+
+/* Card styling */
+.el-card {
+  background-color: #FFFFFF;
+  border-color: #E0E0E0;
+}
+
+.el-card__header {
+  border-bottom: 1px solid #E0E0E0;
+  background-color: #F8F8F8;
+}
+
+/* Form controls styling */
+.el-form-item__label {
+  color: #555555;
+  font-weight: 500;
+}
+
+.el-input__wrapper {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 1px #E0E0E0 inset;
+}
+
+.el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px #D4AF37 inset;
+}
+
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px #D4AF37 inset;
+}
+
+.el-input__inner {
+  color: #333333;
+}
+
+.el-button--primary {
+  background-color: #D4AF37;
+  border-color: #D4AF37;
+  color: #FFFFFF;
+}
+
+.el-button--primary:hover {
+  background-color: #E5C158;
+  border-color: #E5C158;
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: #D4AF37;
+  border-color: #D4AF37;
+}
+
+.el-checkbox__label {
+  color: #555555;
+}
+
+.el-time-select {
+  border-color: #E0E0E0;
+}
+
+.el-time-select:hover {
+  border-color: #D4AF37;
+}
+
+.el-time-select__item.selected {
+  color: #D4AF37;
+  font-weight: bold;
+}
+
+.el-radio__input.is-checked .el-radio__inner {
+  background-color: #D4AF37;
+  border-color: #D4AF37;
+}
+
+.el-radio__label {
+  color: #555555;
 }
 </style>

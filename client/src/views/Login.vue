@@ -8,6 +8,17 @@
         </div>
       </template>
 
+      <!-- Network connectivity alert -->
+      <el-alert
+        v-if="networkError"
+        type="error"
+        :title="networkError.title"
+        :description="networkError.message"
+        show-icon
+        class="mb-6"
+        closable
+      />
+
       <el-form
         ref="formRef"
         :model="form"
@@ -136,6 +147,7 @@ const formRef = ref<FormInstance>()
 const loading = ref(false)
 const showForgotDialog = ref(false)
 const resetting = ref(false)
+const networkError = ref(null)
 
 const form = ref({
   email: '',
@@ -188,6 +200,9 @@ const rules: FormRules = {
 const handleSubmit = async () => {
   if (!formRef.value) return
   
+  // Clear any previous network errors
+  networkError.value = null
+  
   await formRef.value.validate(async (valid) => {
     if (valid) {
       loading.value = true
@@ -202,9 +217,18 @@ const handleSubmit = async () => {
         
         console.log('Login response:', response.data)
         
+        // Check for connectivity warning
+        if (response.data && response.data.connectivityWarning) {
+          ElMessage({
+            type: 'warning',
+            message: 'Connected with limited functionality due to network issues.',
+            duration: 5000
+          })
+        }
+        
         if (response.data && response.data.success) {
           // Store user info in localStorage
-          const userData = response.data.data.tailor
+          const userData = response.data.data?.tailor || response.data.user
           console.log('User data:', userData)
           
           // Show success message
@@ -227,6 +251,16 @@ const handleSubmit = async () => {
         }
       } catch (error) {
         console.error('Login error:', error)
+        
+        // Handle network connectivity issues
+        if (error.isNetworkError) {
+          console.warn('Network connectivity issue detected:', error.userMessage)
+          networkError.value = {
+            title: 'Network Connectivity Issue',
+            message: error.userMessage || 'Cannot connect to the server. Please check your internet connection and try again.'
+          }
+          return
+        }
         
         // Get the error message
         const errorMessage = error.response?.data?.message || error.message || ''
@@ -282,6 +316,14 @@ const handleSubmit = async () => {
           
           // Skip the finally block by returning early
           return
+        } else if (errorMessage.includes('service unavailable') || 
+                  errorMessage.includes('unavailable') || 
+                  error.response?.status === 503) {
+          // Service unavailable error
+          networkError.value = {
+            title: 'Service Unavailable',
+            message: 'The authentication service is temporarily unavailable. Please try again later.'
+          }
         } else {
           // Generic error
           ElMessage.error(errorMessage || 'Login failed. Please try again.')

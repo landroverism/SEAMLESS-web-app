@@ -262,7 +262,7 @@ const formatPrice = (price) => {
   font-weight: 600;
   margin: 0;
   text-align: center;
-  color: #333;
+  color: #999;
 }
 
 .specialization-tags {

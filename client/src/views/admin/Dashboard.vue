@@ -189,6 +189,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import '../../assets/css/admin-dashboard-light.css' // Import dashboard light theme overrides
 import { 
   ClipboardListIcon,
   ClockIcon,

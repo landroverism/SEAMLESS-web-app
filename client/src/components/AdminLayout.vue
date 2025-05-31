@@ -1,17 +1,21 @@
 <template>
   <div class="admin-layout">
     <!-- Mobile Header with Menu Toggle -->
-    <div class="mobile-admin-header md:hidden flex items-center justify-between p-4 bg-[#1E293B] border-b border-[#334155] shadow-md">
-      <h1 class="text-xl font-bold text-white flex items-center gap-2"><scissors-icon :size="20" class="text-[#FF5722]" /> Tailorly Admin</h1>
+    <div class="mobile-admin-header md:hidden flex items-center justify-between p-4 bg-[#1C1B1F] border-b border-[#3D3A42] shadow-lg">
+      <h1 class="text-xl font-bold text-white flex items-center gap-2">
+        <scissors-icon :size="20" class="text-[#D4AF37]" /> 
+        <span class="text-[#D4AF37] font-black">Tailorly</span>
+        <span class="text-white ml-1">Admin</span>
+      </h1>
       <button 
         class="menu-toggle-btn"
         @click="toggleSidebar"
         aria-label="Toggle menu"
       >
         <div class="hamburger" :class="{ 'is-active': sidebarOpen }">
-          <span class="bg-white"></span>
-          <span class="bg-white"></span>
-          <span class="bg-white"></span>
+          <span class="bg-[#D4AF37]"></span>
+          <span class="bg-[#D4AF37]"></span>
+          <span class="bg-[#D4AF37]"></span>
         </div>
       </button>
     </div>
@@ -21,10 +25,13 @@
       class="admin-sidebar"
       :class="{ 'open': sidebarOpen }"
     >
-      <div class="sidebar-header hidden md:flex items-center p-5 border-b border-[#334155] bg-[#1A237E]">
+      <div class="sidebar-header hidden md:flex items-center p-5 border-b border-[#3D3A42] bg-[#18171A]">
         <div class="flex items-center gap-2">
-          <scissors-icon :size="22" class="text-[#FF5722]" />
-          <h1 class="text-xl font-bold text-white">Tailorly Admin</h1>
+          <scissors-icon :size="22" class="text-[#D4AF37]" />
+          <h1 class="text-xl font-bold">
+            <span class="text-[#D4AF37]">Tailorly</span>
+            <span class="text-white ml-1">Admin</span>
+          </h1>
         </div>
       </div>
       
@@ -33,11 +40,11 @@
           <li v-for="item in menuItems" :key="item.id">
             <a 
               href="#" 
-              class="sidebar-link flex items-center p-3 mx-3 rounded-md transition-all duration-200 hover:bg-[#334155] hover:text-white"
-              :class="{ 'active bg-[#1A237E] text-white hover:bg-[#283593] hover:text-white': activeSection === item.id }"
+              class="sidebar-link flex items-center p-3 mx-3 rounded-md transition-all duration-200 hover:bg-[#252429] hover:text-[#D4AF37]"
+              :class="{ 'active bg-[#252429] text-[#D4AF37] border-l-4 border-[#D4AF37]': activeSection === item.id }"
               @click.prevent="showSection(item.id)"
             >
-              <el-icon class="mr-3 text-accent"><component :is="item.icon" /></el-icon>
+              <el-icon class="mr-3" :class="{ 'text-[#D4AF37]': activeSection === item.id, 'text-[#C4C4C4]': activeSection !== item.id }"><component :is="item.icon" /></el-icon>
               <span class="font-medium">{{ item.name }}</span>
             </a>
           </li>
@@ -45,9 +52,9 @@
       </div>
       
       <!-- Logout Button -->
-      <div class="sidebar-footer p-4 border-t border-[#334155] mt-auto">
+      <div class="sidebar-footer p-4 border-t border-[#3D3A42] mt-auto">
         <button 
-          class="logout-btn flex items-center justify-center w-full p-3 rounded-md bg-[#FF5722] text-white hover:bg-[#F4511E] transition-all duration-200 shadow-md"
+          class="logout-btn flex items-center justify-center w-full p-3 rounded-md bg-[#D4AF37] text-[#1C1B1F] hover:bg-[#E5C158] transition-all duration-200 shadow-md"
           @click="logout"
         >
           <el-icon class="mr-2"><SwitchButton /></el-icon>
@@ -57,12 +64,22 @@
     </aside>
     
     <!-- Admin Content -->
-    <div class="admin-content">
+    <div class="admin-content bg-[#1C1B1F]">
+      <!-- Content Header -->
+      <div class="content-header p-4 md:p-6 border-b border-[#3D3A42] flex items-center justify-between">
+        <h2 class="text-xl md:text-2xl font-bold text-white">
+          <span class="text-[#D4AF37]">{{ activeSection.charAt(0).toUpperCase() + activeSection.slice(1) }}</span>
+        </h2>
+        <div class="flex items-center gap-3">
+          <span class="text-[#C4C4C4] hidden md:inline-block">{{ new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}</span>
+        </div>
+      </div>
+      
       <!-- Content Sections -->
       <div 
         v-for="item in menuItems" 
         :key="item.id"
-        class="admin-content-section"
+        class="admin-content-section p-4 md:p-6"
         :class="{ 'hidden': activeSection !== item.id }"
         :id="'section-' + item.id"
       >
@@ -183,42 +200,47 @@ onUnmounted(() => {
   display: flex;
   min-height: 100vh;
   position: relative;
+  background-color: #1C1B1F;
+  color: #FFFFFF;
 }
 
 .admin-sidebar {
   width: 250px;
-  background-color: #1E293B;
-  border-right: 1px solid #334155;
+  background-color: #1C1B1F;
+  border-right: 1px solid #3D3A42;
   height: 100vh;
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
 .admin-content {
   flex: 1;
-  padding: 2rem;
-  background-color: #0F172A;
-  color: #E2E8F0;
+  background-color: #1C1B1F;
+  min-height: 100vh;
+  color: #FFFFFF;
 }
 
 .sidebar-link {
-  color: #CBD5E1;
+  color: #C4C4C4;
   font-weight: 500;
   margin-bottom: 0.25rem;
+  transition: all 0.3s ease;
 }
 
 .sidebar-link:hover {
-  background-color: #334155;
-  color: #F8FAFC;
+  background-color: #252429;
+  color: #D4AF37;
+  transform: translateX(3px);
 }
 
 .sidebar-link.active {
-  background-color: #1A237E;
-  color: white;
+  background-color: #252429;
+  color: #D4AF37;
   font-weight: 600;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-left: 4px solid #D4AF37;
 }
 
 /* Mobile styles */
@@ -240,18 +262,20 @@ onUnmounted(() => {
     flex-direction: column;
     height: 100%;
     overflow-y: auto;
+    background-color: #1C1B1F;
+    border-right: 1px solid #3D3A42;
   }
   
   .admin-sidebar.open {
     left: 0;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
   }
   
   .admin-content {
     margin-left: 0;
     width: 100%;
-    padding: 1rem;
-    padding-top: 70px; /* Space for mobile header */
+    padding: 0;
+    padding-top: 60px; /* Space for mobile header */
   }
   
   .sidebar-overlay {
@@ -260,11 +284,12 @@ onUnmounted(() => {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
     z-index: 90;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
   }
   
   .sidebar-overlay.active {
@@ -278,7 +303,9 @@ onUnmounted(() => {
     left: 0;
     right: 0;
     z-index: 80;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background-color: #18171A; /* Slightly darker than main background */
+    border-bottom: 1px solid #3D3A42;
   }
   
   /* Hamburger button */
@@ -287,6 +314,17 @@ onUnmounted(() => {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .menu-toggle-btn:hover {
+    background-color: rgba(212, 175, 55, 0.1);
   }
   
   .hamburger {
@@ -300,10 +338,10 @@ onUnmounted(() => {
   .hamburger span {
     display: block;
     position: absolute;
-    height: 3px;
+    height: 2px;
     width: 100%;
-    background: white;
-    border-radius: 3px;
+    background: #D4AF37; /* Gold color for hamburger lines */
+    border-radius: 2px;
     opacity: 1;
     left: 0;
     transform: rotate(0deg);
@@ -316,15 +354,21 @@ onUnmounted(() => {
   
   .hamburger span:nth-child(2) {
     top: 8px;
+    width: 75%;
   }
   
   .hamburger span:nth-child(3) {
     top: 16px;
   }
   
+  .hamburger.is-active span {
+    background: #D4AF37; /* Gold color for active state */
+  }
+  
   .hamburger.is-active span:nth-child(1) {
     top: 8px;
     transform: rotate(135deg);
+    width: 100%;
   }
   
   .hamburger.is-active span:nth-child(2) {
@@ -335,6 +379,17 @@ onUnmounted(() => {
   .hamburger.is-active span:nth-child(3) {
     top: 8px;
     transform: rotate(-135deg);
+    width: 100%;
+  }
+  
+  /* Content section styling */
+  .content-header {
+    padding: 1rem;
+    border-bottom: 1px solid #3D3A42;
+  }
+  
+  .admin-content-section {
+    padding: 1rem;
   }
 }
 </style>

@@ -1,0 +1,176 @@
+/* Admin Dashboard Light Theme Overrides
+   This file targets specific dark elements in the admin dashboard
+   and makes them visible against the Papaya Whip background */
+
+/* Dashboard Overview Cards */
+.admin-dashboard .overview-card,
+.admin-dashboard .el-card {
+  background-color: #FFFFFF !important;
+  border-color: rgba(212, 175, 55, 0.3) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.1) !important;
+  color: #2E3A3F !important;
+}
+
+/* Card headers */
+.admin-dashboard .el-card__header {
+  background-color: #FFF8E7 !important;
+  border-bottom: 1px solid #D4AF37 !important;
+  padding: 16px !important;
+}
+
+/* Header titles */
+.admin-dashboard .el-card__header h3 {
+  color: #2E3A3F !important;
+  font-weight: 600 !important;
+}
+
+/* Dashboard metrics and stats */
+.admin-dashboard .overview-card h3,
+.admin-dashboard .overview-card p {
+  color: #2E3A3F !important;
+}
+
+/* Dashboard primary accent labels */
+.admin-dashboard .overview-card p.text-\[\#FF5722\] {
+  color: #D4AF37 !important;
+}
+
+/* Time Range Selectors */
+.admin-dashboard .el-select {
+  background-color: #FFFFFF !important;
+}
+
+.admin-dashboard .el-select .el-input__wrapper {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+  border-radius: 8px !important;
+}
+
+.admin-dashboard .el-select .el-input__inner {
+  color: #2E3A3F !important;
+}
+
+.admin-dashboard .el-select .el-input__suffix {
+  color: #D4AF37 !important;
+}
+
+/* Dashboard Tables */
+.admin-dashboard .el-table {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.admin-dashboard .el-table th {
+  background-color: #FFF8E7 !important;
+  color: #2E3A3F !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid #D4AF37 !important;
+}
+
+.admin-dashboard .el-table td {
+  background-color: #FFFFFF !important;
+  color: #2E3A3F !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+}
+
+.admin-dashboard .el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: rgba(212, 175, 55, 0.05) !important;
+}
+
+/* Dashboard Buttons */
+.admin-dashboard .el-button {
+  background-color: #FFFFFF !important;
+  border-color: #D4AF37 !important;
+  color: #2E3A3F !important;
+  border-radius: 8px !important;
+}
+
+.admin-dashboard .el-button--primary,
+.admin-dashboard .el-button.is-primary {
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+  color: #FFEFD5 !important;
+}
+
+.admin-dashboard .el-button:hover {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  border-color: #C9A227 !important;
+}
+
+.admin-dashboard .el-button--primary:hover,
+.admin-dashboard .el-button.is-primary:hover {
+  background-color: #C9A227 !important;
+  border-color: #C9A227 !important;
+}
+
+/* Dashboard Tag Elements */
+.admin-dashboard .el-tag {
+  border-radius: 4px !important;
+  padding: 4px 8px !important;
+}
+
+.admin-dashboard .el-tag--success {
+  background-color: rgba(76, 175, 80, 0.1) !important;
+  border-color: rgba(76, 175, 80, 0.3) !important;
+  color: #2E7D32 !important;
+}
+
+.admin-dashboard .el-tag--warning {
+  background-color: rgba(255, 152, 0, 0.1) !important;
+  border-color: rgba(255, 152, 0, 0.3) !important;
+  color: #F57C00 !important;
+}
+
+.admin-dashboard .el-tag--danger {
+  background-color: rgba(244, 67, 54, 0.1) !important;
+  border-color: rgba(244, 67, 54, 0.3) !important;
+  color: #D32F2F !important;
+}
+
+.admin-dashboard .el-tag--info {
+  background-color: rgba(33, 150, 243, 0.1) !important;
+  border-color: rgba(33, 150, 243, 0.3) !important;
+  color: #1976D2 !important;
+}
+
+/* Dashboard Header Text */
+.admin-dashboard .dashboard-header h2 {
+  color: #2E3A3F !important;
+  font-weight: 700 !important;
+  background-image: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+}
+
+/* Action icons */
+.admin-dashboard .el-button-group .el-button {
+  background-color: #FFFFFF !important;
+  border-color: rgba(212, 175, 55, 0.3) !important;
+  color: #D4AF37 !important;
+}
+
+.admin-dashboard .el-button-group .el-button:hover {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+}
+
+/* Make icon colors visible */
+.admin-dashboard svg.text-\[\#2196F3\],
+.admin-dashboard svg.text-\[\#4CAF50\],
+.admin-dashboard svg.text-\[\#FFC107\],
+.admin-dashboard svg.text-\[\#9C27B0\] {
+  color: #D4AF37 !important;
+}
+
+.admin-dashboard .rounded-full {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+}
+
+/* Chart backgrounds */
+.admin-dashboard canvas {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-radius: 8px !important;
+}
