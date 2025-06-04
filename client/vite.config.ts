@@ -37,15 +37,9 @@ export default defineConfig({
         }
       }
     },
-    // Prevent minification issues
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        // Prevent optimization that might break reactivity
-        keep_infinity: true,
-        pure_getters: true
-      }
-    }
+    // Use esbuild minifier instead of terser
+    minify: 'esbuild',
+    target: 'es2015',
   },
   // Ensure CSS is properly processed
   css: {
