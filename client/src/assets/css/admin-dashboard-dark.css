@@ -52,9 +52,11 @@
 
 /* Make stats change indicators more visible */
 .admin-dashboard .text-green-400,
-.admin-dashboard .text-amber-400 {
-  color: #38B2AC !important; /* Bright teal for better visibility */
-  font-weight: 500 !important;
+.admin-dashboard .text-amber-400,
+.admin-dashboard .mt-4.text-sm {
+  color: #4CD964 !important; /* Bright green for better visibility */
+  font-weight: 600 !important;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 }
 
 .admin-dashboard .text-sm {
@@ -124,6 +126,49 @@
 .admin-dashboard .el-table .cell {
   font-size: 0.875rem !important;
   line-height: 1.25rem !important;
+}
+
+/* Recent Orders table specific enhancements */
+.admin-dashboard .el-table__header-wrapper th {
+  background-color: #1E2A3A !important;
+  color: #4299E1 !important;
+  font-weight: 600 !important;
+  padding: 12px 8px !important;
+  font-size: 0.9rem !important;
+}
+
+.admin-dashboard .el-table__row td {
+  padding: 12px 8px !important;
+  color: #E2E8F0 !important;
+}
+
+/* Status tags in tables */
+.admin-dashboard .el-table .el-tag--success {
+  background-color: rgba(72, 187, 120, 0.2) !important;
+  border-color: #48BB78 !important;
+  color: #48BB78 !important;
+  font-weight: 600 !important;
+}
+
+.admin-dashboard .el-table .el-tag--warning {
+  background-color: rgba(237, 137, 54, 0.2) !important;
+  border-color: #ED8936 !important;
+  color: #ED8936 !important;
+  font-weight: 600 !important;
+}
+
+.admin-dashboard .el-table .el-tag--danger {
+  background-color: rgba(245, 101, 101, 0.2) !important;
+  border-color: #F56565 !important;
+  color: #F56565 !important;
+  font-weight: 600 !important;
+}
+
+.admin-dashboard .el-table .el-tag--info {
+  background-color: rgba(90, 103, 216, 0.2) !important;
+  border-color: #5A67D8 !important;
+  color: #5A67D8 !important;
+  font-weight: 600 !important;
 }
 
 /* Dashboard Buttons */
@@ -236,7 +281,27 @@
 /* Fix for dropdown menus */
 .el-select-dropdown {
   background-color: #263143 !important;
-  border-color: #3A4A5F !important;
+  border-color: #4299E1 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Service Orders by Type section - ensure dropdown is visible */
+.admin-dashboard .el-card__header .flex.items-center.justify-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.admin-dashboard .el-card__header .el-select {
+  min-width: 120px;
+  margin-left: 16px;
+  background-color: #2D3748 !important;
+}
+
+.admin-dashboard .el-card__header .el-select .el-input__wrapper {
+  background-color: #2D3748 !important;
+  box-shadow: 0 0 0 1px #4299E1 inset !important;
 }
 
 .el-select-dropdown__item {

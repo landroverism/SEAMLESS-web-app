@@ -1,0 +1,56 @@
+// Color Variables
+$primary-color: #D4AF37;
+$secondary-color: #2E3A3F;
+$background-color: #FFEFD5;
+$text-color: #2E3A3F;
+$accent-color: #D4AF37;
+$light-color: #FFFFFF;
+$dark-color: #1E2A3A;
+$dark-secondary: #263143;
+$border-color: #3A4A5F;
+$highlight-color: #4299E1;
+
+// Dashboard Dark Theme Colors
+$dashboard-bg: #1E2A3A;
+$dashboard-card-bg: #263143;
+$dashboard-text: #E2E8F0;
+$dashboard-accent: #4299E1;
+$dashboard-border: #3A4A5F;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+// Font Sizes
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 1.5rem;
+$font-size-2xl: 2rem;
+
+// Border Radius
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1rem;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Transitions
+$transition-fast: 150ms;
+$transition-normal: 300ms;
+$transition-slow: 500ms;
