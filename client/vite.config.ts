@@ -14,14 +14,36 @@ export default defineConfig({
   build: {
     // Generate source maps for better debugging
     sourcemap: true,
+    // Fix circular dependency issues
+    commonjsOptions: {
+      strictRequires: true
+    },
     // Improve chunking strategy
     rollupOptions: {
       output: {
-        manualChunks: {
-          'element-plus': ['element-plus'],
-          'vue-vendor': ['vue', 'vue-router', 'pinia'],
-          'chart': ['chart.js'],
+        manualChunks(id) {
+          // Create separate chunks for large dependencies
+          if (id.includes('node_modules/element-plus')) {
+            return 'element-plus'
+          }
+          if (id.includes('node_modules/vue') || 
+              id.includes('node_modules/vue-router') || 
+              id.includes('node_modules/pinia')) {
+            return 'vue-vendor'
+          }
+          if (id.includes('node_modules/chart.js')) {
+            return 'chart'
+          }
         }
+      }
+    },
+    // Prevent minification issues
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        // Prevent optimization that might break reactivity
+        keep_infinity: true,
+        pure_getters: true
       }
     }
   },
@@ -32,5 +54,9 @@ export default defineConfig({
         additionalData: `@use "@/assets/css/variables.scss" as *;`
       }
     }
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['vue', 'vue-router', 'pinia', 'element-plus']
   }
 })
