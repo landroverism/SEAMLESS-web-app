@@ -33,6 +33,27 @@ api.interceptors.response.use(
     return response;
   },
   error => {
+    // Check for network connectivity issues
+    if (!error.response) {
+      console.error('Network Error: No response from server', error.message);
+      
+      // Create a more user-friendly error
+      const networkError = new Error('Network connectivity issue');
+      networkError.isNetworkError = true;
+      networkError.originalError = error;
+      
+      // Add user-friendly message based on error type
+      if (error.code === 'ECONNABORTED') {
+        networkError.userMessage = 'Request timed out. Please try again later.';
+      } else if (error.message.includes('Network Error')) {
+        networkError.userMessage = 'Cannot connect to the server. Please check your internet connection.';
+      } else {
+        networkError.userMessage = 'Connection issue. Please try again later.';
+      }
+      
+      return Promise.reject(networkError);
+    }
+    
     // Log detailed error information
     console.error('API Error:', {
       url: error.config?.url,
@@ -49,12 +70,21 @@ api.interceptors.response.use(
       localStorage.removeItem('tailorly_token');
       localStorage.removeItem('tailorly_user');
       
-      // Redirect to login page if not already there
+      // Only redirect if we're not already on the login page
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
     }
     
+    // Handle 503 Service Unavailable (likely network or server issues)
+    if (error.response && error.response.status === 503) {
+      console.warn('Service unavailable, likely network or server issues');
+      
+      // Add user-friendly message
+      error.userMessage = error.response.data?.message || 
+                         'Service temporarily unavailable. Please try again later.';
+    }
+
     return Promise.reject(error);
   }
 );

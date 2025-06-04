@@ -1,6 +1,6 @@
 <template>
   <el-config-provider>
-    <div class="min-h-screen flex flex-col app-container">
+    <div class="min-h-screen flex flex-col app-container bg-papaya-whip">
       <!-- Responsive navigation system -->
       <div class="navigation-container">
         <!-- Desktop navigation - only visible on md screens and up -->
@@ -33,6 +33,9 @@ import authStateService from './services/auth-state.service'
 import themeService from './services/theme.service'
 import './assets/css/mobile-responsive.css'
 import './assets/css/element-plus-theme.css'
+import './assets/css/navbar-enhanced.css'
+import './assets/css/admin-sidebar.css'
+import './assets/css/element-plus-overrides.css' // Override for dark backgrounds in dropdowns
 
 // Monitor theme changes for debugging
 onMounted(() => {
@@ -130,43 +133,43 @@ onBeforeUnmount(() => {
 }
 
 :root {
-  /* Light theme variables - Vibrant Fashion Palette */
-  --color-primary: #1E88E5; /* Vibrant Blue - modern and eye-catching */
-  --color-primary-light: #42A5F5; /* Lighter blue for hover states */
-  --color-accent: #FF5722; /* Vibrant Orange - creates strong visual interest */
-  --color-accent-light: #FF8A65; /* Lighter orange for subtle accents */
-  --color-background: #F5F7FA; /* Crisp Light Gray - clean, bright background */
+  /* Light theme variables - Updated Color Palette */
+  --color-primary: #2E3A3F; /* Soft Black for text & dropdown */
+  --color-primary-light: #3A474D; /* Slightly lighter version of Soft Black */
+  --color-accent: #FBBF24; /* Star Yellow - accent color */
+  --color-accent-light: #FCD34D; /* Lighter version of Star Yellow */
+  --color-background: #FFFFFF; /* Background White */
   --color-card: #FFFFFF; /* Pure white for cards */
-  --color-text: #263238; /* Dark Blue-Gray - for clear readability */
-  --color-text-muted: #607D8B; /* Medium Blue-Gray - visible but subtle */
-  --color-border: #ECEFF1; /* Very Light Blue-Gray - subtle borders */
-  --color-hover: rgba(255, 87, 34, 0.1); /* Subtle orange hover effect */
-  --color-shadow: rgba(30, 136, 229, 0.1); /* Soft blue shadows */
-  --color-shadow-dark: rgba(30, 136, 229, 0.2); /* Deeper blue shadows */
-  --color-success: #4CAF50; /* Bright Green - clearly visible success */
-  --color-warning: #FFC107; /* Bright Amber - clearly visible warnings */
-  --color-danger: #F44336; /* Bright Red - clearly visible errors */
-  --color-info: #03A9F4; /* Light Blue - clearly visible information */
+  --color-text: #2E3A3F; /* Soft Black for text */
+  --color-text-muted: #AEB5BA; /* Placeholder Grey */
+  --color-border: #E5E7EB; /* Border Light Grey */
+  --color-hover: rgba(251, 191, 36, 0.1); /* Subtle yellow hover effect */
+  --color-shadow: rgba(46, 58, 63, 0.1); /* Soft shadows */
+  --color-shadow-dark: rgba(46, 58, 63, 0.2); /* Deeper shadows */
+  --color-success: #4CAF50; /* Keeping success color */
+  --color-warning: #FBBF24; /* Using Star Yellow for warnings */
+  --color-danger: #F44336; /* Keeping danger color */
+  --color-info: #E0F6F2; /* Muted Cyan */
 }
 
-/* Dark theme variables - Bold Night Fashion Palette */
+/* Dark theme variables - Keeping dark theme with adjustments to match new palette */
 html.dark {
-  --color-primary: #2196F3; /* Brighter Blue for dark mode visibility */
-  --color-primary-light: #64B5F6; /* Even lighter blue for hover states */
-  --color-accent: #FF7043; /* Brighter Orange for dark mode visibility */
-  --color-accent-light: #FFAB91; /* Even lighter orange for accents */
-  --color-background: #263238; /* Dark Blue-Gray - modern dark background */
-  --color-card: #37474F; /* Medium Blue-Gray - visible card background */
-  --color-text: #ECEFF1; /* Very Light Blue-Gray - for contrast */
-  --color-text-muted: #B0BEC5; /* Light Blue-Gray - visible muted text */
-  --color-border: #455A64; /* Medium-Dark Blue-Gray - visible borders */
-  --color-hover: rgba(255, 112, 67, 0.2); /* More visible hover in dark mode */
-  --color-shadow: rgba(33, 150, 243, 0.2); /* Visible shadows for dark mode */
-  --color-shadow-dark: rgba(33, 150, 243, 0.4); /* Deeper visible shadows */
-  --color-success: #66BB6A; /* Brighter Green for visibility */
-  --color-warning: #FFCA28; /* Brighter Amber for visibility */
-  --color-danger: #EF5350; /* Brighter Red for visibility */
-  --color-info: #29B6F6; /* Brighter Blue for visibility */
+  --color-primary: #2E3A3F; /* Soft Black */
+  --color-primary-light: #3A474D; /* Slightly lighter version of Soft Black */
+  --color-accent: #FBBF24; /* Star Yellow */
+  --color-accent-light: #FCD34D; /* Lighter version of Star Yellow */
+  --color-background: #1A1D20; /* Dark background */
+  --color-card: #2E3A3F; /* Soft Black for cards */
+  --color-text: #FFFFFF; /* White text for contrast */
+  --color-text-muted: #AEB5BA; /* Placeholder Grey */
+  --color-border: #E5E7EB; /* Border Light Grey */
+  --color-hover: rgba(251, 191, 36, 0.2); /* More visible hover in dark mode */
+  --color-shadow: rgba(251, 191, 36, 0.2); /* Visible shadows for dark mode */
+  --color-shadow-dark: rgba(251, 191, 36, 0.4); /* Deeper visible shadows */
+  --color-success: #4CAF50; /* Keeping success color */
+  --color-warning: #FBBF24; /* Using Star Yellow for warnings */
+  --color-danger: #F44336; /* Keeping danger color */
+  --color-info: #E0F6F2; /* Muted Cyan */
 }
 
 /* Apply theme to app container */

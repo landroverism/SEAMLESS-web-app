@@ -3,9 +3,9 @@
   /* Light Theme */
   --el-color-primary: var(--color-primary);
   --el-color-primary-light-3: var(--color-primary-light);
-  --el-color-primary-light-5: rgba(44, 62, 80, 0.15);
-  --el-color-primary-light-7: rgba(44, 62, 80, 0.1);
-  --el-color-primary-light-9: rgba(44, 62, 80, 0.05);
+  --el-color-primary-light-5: rgba(46, 58, 63, 0.15);
+  --el-color-primary-light-7: rgba(46, 58, 63, 0.1);
+  --el-color-primary-light-9: rgba(46, 58, 63, 0.05);
   --el-color-success: var(--color-success);
   --el-color-warning: var(--color-warning);
   --el-color-danger: var(--color-danger);
@@ -31,9 +31,9 @@
 html.dark {
   --el-color-primary: var(--color-accent);
   --el-color-primary-light-3: var(--color-accent-light);
-  --el-color-primary-light-5: rgba(22, 160, 133, 0.15);
-  --el-color-primary-light-7: rgba(22, 160, 133, 0.1);
-  --el-color-primary-light-9: rgba(22, 160, 133, 0.05);
+  --el-color-primary-light-5: rgba(251, 191, 36, 0.15);
+  --el-color-primary-light-7: rgba(251, 191, 36, 0.1);
+  --el-color-primary-light-9: rgba(251, 191, 36, 0.05);
   --el-bg-color: var(--color-background);
   --el-bg-color-overlay: var(--color-card);
   --el-text-color-primary: var(--color-text);
@@ -203,7 +203,39 @@ html.dark .el-step__head.is-process {
   border-color: var(--color-accent);
 }
 
-html.dark .el-step__icon.is-text {
-  border-color: var(--color-accent);
-  background-color: var(--color-card);
+html.dark .el-step__head.is-wait {
+  color: var(--color-text-muted);
+  border-color: var(--color-text-muted);
+}
+
+html.dark .el-step__line {
+  background-color: var(--color-border);
+}
+
+/* Light mode button overrides */
+.el-button--primary {
+  --el-button-bg-color: var(--color-primary);
+  --el-button-border-color: var(--color-primary);
+  --el-button-hover-bg-color: var(--color-primary-light);
+  --el-button-hover-border-color: var(--color-primary-light);
+}
+
+/* Submit button styling */
+.el-button--info {
+  --el-button-bg-color: var(--color-info);
+  --el-button-border-color: var(--color-info);
+  --el-button-text-color: var(--color-primary);
+  --el-button-hover-bg-color: #C7EDE6;
+  --el-button-hover-border-color: #C7EDE6;
+  --el-button-hover-text-color: var(--color-primary);
+}
+
+/* Star rating styling */
+.el-rate__icon {
+  color: var(--color-accent);
+}
+
+/* Input placeholder styling */
+.el-input__inner::placeholder {
+  color: var(--color-text-muted);
 }

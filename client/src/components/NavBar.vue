@@ -1,10 +1,10 @@
 <template>
-  <el-header class="navbar-header shadow-md" :class="{ 'navbar-hidden': isNavbarHidden }">
+  <el-header class="navbar-header shadow-sm" :class="{ 'navbar-hidden': isNavbarHidden }">
     <div class="container mx-auto px-4">
       <div class="h-16 flex items-center justify-between">
-        <router-link to="/" class="flex items-center gap-3 text-xl font-bold text-primary group">
-          <scissors-icon :size="32" class="text-accent transform group-hover:rotate-45 transition-transform duration-300" />
-          <span class="group-hover:text-accent transition-colors text-xl md:text-2xl font-black">Tailorly</span>
+        <router-link to="/" class="flex items-center gap-3 text-xl font-bold group">
+          <scissors-icon :size="32" class="text-[#D4AF37] transform group-hover:rotate-45 transition-transform duration-300" />
+          <span class="text-[#D4AF37] group-hover:text-[#E5C158] transition-colors text-xl md:text-2xl font-black">Tailorly</span>
         </router-link>
 
         <!-- Navigation Links - Only visible on medium and larger screens -->
@@ -13,10 +13,10 @@
             v-for="item in menuItems" 
             :key="item.path"
             :to="item.path"
-            class="relative text-text-muted hover:text-primary transition-colors py-2 group"
+            class="relative text-[#333333] hover:text-[#D4AF37] transition-colors py-2 group"
           >
             {{ item.label }}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
           </router-link>
           
           <div class="flex items-center gap-3">
@@ -24,13 +24,13 @@
             <template v-if="!isAuthenticated">
               <el-button 
                 @click="$router.push('/login')"
-                class="!bg-[#1A237E] !border-[#1A237E] hover:!bg-[#283593] hover:!border-[#283593] !text-white shadow-md transition-colors"
+                class="!bg-[#D4AF37] !border-[#D4AF37] hover:!bg-[#E5C158] hover:!border-[#E5C158] !text-[#1C1B1F] shadow-md transition-colors"
               >
                 Sign In
               </el-button>
               <el-button 
                 @click="$router.push('/register')"
-                class="!bg-[#1A237E] !border-[#1A237E] hover:!bg-[#283593] hover:!border-[#283593] !text-white shadow-md transition-colors"
+                class="!bg-transparent !border-[#D4AF37] !text-[#D4AF37] hover:!bg-[#D4AF37] hover:!text-[#1C1B1F] shadow-md transition-colors"
               >
                 Get Started
               </el-button>
@@ -40,46 +40,38 @@
             <el-button 
               v-if="isAdmin && isAuthenticated"
               @click="$router.push('/admin')"
-              class="!bg-[#1A237E] !border-[#1A237E] hover:!bg-[#283593] hover:!border-[#283593] !text-white shadow-md transition-colors"
+              class="!bg-[#D4AF37] !border-[#D4AF37] hover:!bg-[#E5C158] hover:!border-[#E5C158] !text-[#1C1B1F] shadow-md transition-colors"
             >
               Admin Panel
             </el-button>
             
             <!-- User profile dropdown for authenticated users -->
             <el-dropdown v-if="isAuthenticated" trigger="click">
-              <div class="user-avatar-container cursor-pointer flex items-center gap-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white shadow-md" 
-                     :style="{ backgroundColor: userAvatarColor }">
+              <div class="user-avatar-container cursor-pointer flex items-center gap-2 hover:bg-[#F5F5F5] p-2 rounded-lg transition-colors">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm" 
+                     :style="{ backgroundColor: userAvatarColor || '#D4AF37' }">
                   {{ userInitials }}
                 </div>
-                <div class="hidden md:block text-left">
-                  <div class="font-medium text-primary">{{ userName }}</div>
-                  <div class="text-xs text-gray-500 truncate max-w-[120px]" v-if="currentUser && currentUser.email">{{ currentUser.email }}</div>
-                </div>
-                <el-icon class="text-gray-500"><arrow-down /></el-icon>
+                <span class="text-[#333333] hidden md:inline-block">{{ userName }}</span>
+                <chevron-down-icon :size="16" class="text-[#777777]" />
               </div>
-              
               <template #dropdown>
-                <el-dropdown-menu class="user-dropdown-menu">
-                  <div class="px-4 py-3 border-b border-gray-100 md:hidden">
-                    <div class="font-medium">{{ userName }}</div>
-                    <div class="text-sm text-gray-500 truncate" v-if="currentUser && currentUser.email">{{ currentUser.email }}</div>
-                  </div>
+                <el-dropdown-menu>
                   <el-dropdown-item @click="$router.push('/profile')">
-                    <user-icon :size="18" class="mr-2" />
-                    <span>My Profile</span>
-                  </el-dropdown-item>
-                  <el-dropdown-item @click="$router.push('/orders')">
-                    <list-icon :size="18" class="mr-2" />
-                    <span>My Orders</span>
+                    <user-icon :size="16" class="mr-2 text-[#D4AF37]" />
+                    Profile
                   </el-dropdown-item>
                   <el-dropdown-item @click="$router.push('/measurements')">
-                    <ruler-icon :size="18" class="mr-2" />
-                    <span>My Measurements</span>
+                    <ruler-icon :size="16" class="mr-2 text-[#D4AF37]" />
+                    My Measurements
                   </el-dropdown-item>
-                  <el-dropdown-item divided @click="handleLogout" class="text-red-500 hover:text-red-600">
-                    <log-out-icon :size="18" class="mr-2" />
-                    <span>Logout</span>
+                  <el-dropdown-item @click="$router.push('/orders')">
+                    <shopping-bag-icon :size="16" class="mr-2 text-[#D4AF37]" />
+                    My Orders
+                  </el-dropdown-item>
+                  <el-dropdown-item divided @click="handleLogout">
+                    <log-out-icon :size="16" class="mr-2 text-[#D4AF37]" />
+                    Logout
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -271,12 +263,13 @@ const menuItems = [
   left: 0;
   right: 0;
   z-index: 40;
-  background-color: var(--color-card);
-  box-shadow: 0 1px 3px var(--color-shadow);
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
   height: 64px;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #EEEEEE;
 }
 
 /* Hide navbar when scrolling down */
@@ -286,44 +279,56 @@ const menuItems = [
 
 .user-avatar-container {
   min-width: 40px;
+  border: 1px solid #3D3A42;
+  border-radius: 8px;
 }
 
-:deep(.text-primary) {
-  color: var(--color-primary);
+/* Dropdown menu styling */
+:deep(.el-dropdown-menu) {
+  background-color: #FFFFFF !important;
+  border: 1px solid #EEEEEE !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
-:deep(.text-text-muted) {
-  color: var(--color-text-muted);
+:deep(.el-dropdown-menu__item) {
+  color: #333333 !important;
 }
 
-:deep(.hover\:text-primary:hover) {
-  color: var(--color-primary);
+:deep(.el-dropdown-menu__item:hover) {
+  background-color: #F5F5F5 !important;
+  color: #D4AF37 !important;
 }
 
-:deep(.bg-primary) {
-  background-color: var(--color-primary);
+:deep(.el-dropdown-menu__item.is-disabled) {
+  color: #999999 !important;
 }
 
-:deep(.hover\:bg-primary-light:hover) {
-  background-color: var(--color-primary-light);
+:deep(.el-dropdown__popper) {
+  --el-dropdown-menuItem-hover-fill: #F5F5F5 !important;
+  --el-dropdown-menuItem-hover-color: #D4AF37 !important;
 }
 
-:deep(.bg-success) {
-  background-color: var(--color-success);
+/* Button styling */
+:deep(.el-button) {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
 }
 
-:deep(.hover\:bg-success-light:hover) {
-  background-color: var(--color-success);
-  opacity: 0.9;
+:deep(.el-button--primary) {
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+  color: #1C1B1F !important;
 }
 
-:deep(.hover\:bg-gray-100:hover) {
-  background-color: var(--color-hover);
+:deep(.el-button--primary:hover) {
+  background-color: #E5C158 !important;
+  border-color: #E5C158 !important;
 }
 
 @media (max-width: 768px) {
   .navbar-header {
-    box-shadow: 0 2px 10px var(--color-shadow);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     padding: 0 12px !important;
     height: 70px !important;
   }

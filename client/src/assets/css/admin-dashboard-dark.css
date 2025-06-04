@@ -1,0 +1,269 @@
+/* Admin Dashboard Dark Theme 
+   This file applies a dark blue theme to match the provided design */
+
+/* Main dashboard container */
+.admin-dashboard {
+  background-color: #1E2A3A;
+  color: #E2E8F0;
+}
+
+/* Dashboard Header */
+.admin-dashboard .dashboard-header h2 {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  background-image: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+}
+
+/* Overview Cards */
+.admin-dashboard .overview-card,
+.admin-dashboard .el-card {
+  background-color: #263143 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  color: #E2E8F0 !important;
+}
+
+/* Card headers */
+.admin-dashboard .el-card__header {
+  background-color: #263143 !important;
+  border-bottom: 1px solid #3A4A5F !important;
+  padding: 16px !important;
+}
+
+/* Header titles */
+.admin-dashboard .el-card__header h3 {
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+}
+
+/* Dashboard metrics and stats */
+.admin-dashboard .overview-card h3 {
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+}
+
+.admin-dashboard .overview-card p {
+  color: #A0AEC0 !important;
+}
+
+/* Make stats change indicators more visible */
+.admin-dashboard .text-green-400,
+.admin-dashboard .text-amber-400 {
+  color: #38B2AC !important; /* Bright teal for better visibility */
+  font-weight: 500 !important;
+}
+
+.admin-dashboard .text-sm {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+/* Dashboard accent labels */
+.admin-dashboard .overview-card p.text-\[\#FF5722\] {
+  color: #4299E1 !important; /* Blue accent color */
+}
+
+/* Time Range Selectors */
+.admin-dashboard .el-select {
+  background-color: #2D3748 !important;
+}
+
+.admin-dashboard .el-select .el-input__wrapper {
+  background-color: #2D3748 !important;
+  box-shadow: 0 0 0 1px #4299E1 inset !important;
+  border-radius: 4px !important;
+}
+
+.admin-dashboard .el-select .el-input__inner {
+  color: #FFFFFF !important;
+}
+
+.admin-dashboard .el-select .el-input__suffix {
+  color: #4299E1 !important;
+}
+
+/* Ensure dropdown is visible against dark background */
+.el-select-dropdown.el-popper {
+  background-color: #2D3748 !important;
+  border: 1px solid #4299E1 !important;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dashboard Tables */
+.admin-dashboard .el-table {
+  background-color: #263143 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.admin-dashboard .el-table th {
+  background-color: #1E2A3A !important;
+  color: #4299E1 !important; /* Bright blue for better visibility */
+  font-weight: 600 !important;
+  border-bottom: 1px solid #3A4A5F !important;
+  padding: 12px 8px !important;
+}
+
+.admin-dashboard .el-table td {
+  background-color: #263143 !important;
+  color: #FFFFFF !important; /* Brighter text for better readability */
+  border-bottom: 1px solid #3A4A5F !important;
+  padding: 12px 8px !important;
+}
+
+.admin-dashboard .el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: #2D3748 !important;
+}
+
+/* Ensure table text is visible */
+.admin-dashboard .el-table .cell {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+/* Dashboard Buttons */
+.admin-dashboard .el-button {
+  background-color: #2D3748 !important;
+  border-color: #3A4A5F !important;
+  color: #E2E8F0 !important;
+  border-radius: 4px !important;
+}
+
+.admin-dashboard .el-button--primary,
+.admin-dashboard .el-button.is-primary {
+  background-color: #4299E1 !important;
+  border-color: #4299E1 !important;
+  color: #FFFFFF !important;
+}
+
+.admin-dashboard .el-button:hover {
+  background-color: #2D3748 !important;
+  border-color: #4299E1 !important;
+}
+
+.admin-dashboard .el-button--primary:hover,
+.admin-dashboard .el-button.is-primary:hover {
+  background-color: #3182CE !important;
+  border-color: #3182CE !important;
+}
+
+/* Dashboard Tag Elements */
+.admin-dashboard .el-tag {
+  border-radius: 4px !important;
+  padding: 2px 8px !important;
+}
+
+.admin-dashboard .el-tag--success {
+  background-color: rgba(72, 187, 120, 0.2) !important;
+  border-color: #48BB78 !important;
+  color: #48BB78 !important;
+}
+
+.admin-dashboard .el-tag--warning {
+  background-color: rgba(237, 137, 54, 0.2) !important;
+  border-color: #ED8936 !important;
+  color: #ED8936 !important;
+}
+
+.admin-dashboard .el-tag--danger {
+  background-color: rgba(245, 101, 101, 0.2) !important;
+  border-color: #F56565 !important;
+  color: #F56565 !important;
+}
+
+.admin-dashboard .el-tag--info {
+  background-color: rgba(90, 103, 216, 0.2) !important;
+  border-color: #5A67D8 !important;
+  color: #5A67D8 !important;
+}
+
+/* Action icons */
+.admin-dashboard .el-button-group .el-button {
+  background-color: #2D3748 !important;
+  border-color: #3A4A5F !important;
+  color: #4299E1 !important;
+}
+
+.admin-dashboard .el-button-group .el-button:hover {
+  background-color: #2D3748 !important;
+  border-color: #4299E1 !important;
+}
+
+/* Icon colors */
+.admin-dashboard svg.text-\[\#2196F3\],
+.admin-dashboard svg.text-\[\#4CAF50\],
+.admin-dashboard svg.text-\[\#FFC107\],
+.admin-dashboard svg.text-\[\#9C27B0\] {
+  color: #4299E1 !important;
+}
+
+.admin-dashboard .rounded-full {
+  background-color: rgba(66, 153, 225, 0.2) !important;
+}
+
+/* Chart backgrounds */
+.admin-dashboard canvas {
+  background-color: #263143 !important;
+  border-radius: 8px !important;
+}
+
+/* Client feedback cards */
+.admin-dashboard .border-\[\#334155\] {
+  border-color: #3A4A5F !important;
+}
+
+.admin-dashboard .bg-\[\#263238\] {
+  background-color: #2D3748 !important;
+}
+
+.admin-dashboard .text-white {
+  color: #FFFFFF !important;
+}
+
+.admin-dashboard .text-gray-300 {
+  color: #CBD5E0 !important;
+}
+
+.admin-dashboard .text-gray-400 {
+  color: #A0AEC0 !important;
+}
+
+/* Fix for dropdown menus */
+.el-select-dropdown {
+  background-color: #263143 !important;
+  border-color: #3A4A5F !important;
+}
+
+.el-select-dropdown__item {
+  color: #E2E8F0 !important;
+}
+
+.el-select-dropdown__item.hover,
+.el-select-dropdown__item:hover {
+  background-color: #2D3748 !important;
+}
+
+.el-select-dropdown__item.selected {
+  color: #4299E1 !important;
+}
+
+/* Override any remaining light elements */
+.admin-dashboard .bg-white,
+.admin-dashboard .bg-\[\#FFFFFF\] {
+  background-color: #263143 !important;
+}
+
+.admin-dashboard .text-black,
+.admin-dashboard .text-\[\#000000\] {
+  color: #E2E8F0 !important;
+}
+
+/* Ensure the main container has the dark background */
+.app-container .admin-dashboard {
+  background-color: #1E2A3A !important;
+}

@@ -67,7 +67,7 @@
       <!-- Main Content Area -->
       <el-container>
         <!-- Header -->
-        <el-header class="bg-white border-b border-gray-200 flex items-center justify-between">
+        <el-header class="admin-header flex items-center justify-between">
           <div class="flex items-center">
             <h2 class="text-xl font-bold text-primary">{{ pageTitle }}</h2>
           </div>
@@ -95,7 +95,7 @@
         </el-header>
         
         <!-- Main Content -->
-        <el-main class="bg-gray-50">
+        <el-main class="admin-content bg-papaya-whip">
           <router-view />
         </el-main>
       </el-container>

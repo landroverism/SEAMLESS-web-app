@@ -1,0 +1,88 @@
+/* Enhanced Navbar Styling */
+.navbar-header {
+  background-color: rgba(255, 239, 213, 0.95) !important; /* Papaya Whip with slight transparency */
+  border-bottom: 2px solid #D4AF37 !important;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  transition: all 0.3s ease !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+}
+
+/* Make navigation links more visible and elegant */
+.navbar-header .router-link-active {
+  color: #D4AF37 !important;
+  font-weight: 600 !important;
+  position: relative !important;
+}
+
+.navbar-header .router-link-active::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 3px !important;
+  background-color: #D4AF37 !important;
+  border-radius: 3px !important;
+  box-shadow: 0 1px 3px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Enhance navigation links */
+.navbar-header .router-link-exact-active {
+  color: #D4AF37 !important;
+  font-weight: 600 !important;
+}
+
+/* Style for all navigation links */
+.navbar-header a {
+  color: #2E3A3F !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px !important;
+  transition: all 0.3s ease !important;
+}
+
+.navbar-header a:hover {
+  color: #D4AF37 !important;
+  background-color: rgba(212, 175, 55, 0.05) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Enhanced dropdown styling */
+.navbar-header .el-dropdown-menu {
+  background-color: rgba(255, 239, 213, 0.95) !important;
+  border: 1px solid #D4AF37 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.navbar-header .el-dropdown-menu__item {
+  color: #2E3A3F !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+
+.navbar-header .el-dropdown-menu__item:hover {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  color: #D4AF37 !important;
+}
+
+/* Enhanced button styling */
+.navbar-header .el-button {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px !important;
+  transition: all 0.3s ease !important;
+  padding: 10px 20px !important;
+}
+
+.navbar-header .el-button:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25) !important;
+}

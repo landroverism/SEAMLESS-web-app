@@ -189,6 +189,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import '../../assets/css/admin-dashboard-dark.css' // Import dashboard dark theme to match design
 import { 
   ClipboardListIcon,
   ClockIcon,

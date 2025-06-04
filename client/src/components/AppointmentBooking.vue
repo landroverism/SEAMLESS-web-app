@@ -27,9 +27,10 @@
           <el-select 
             v-model="appointmentForm.service"             
             placeholder="Select a service"
-            class="mobile-full-width"
+            class="mobile-full-width custom-select light-select"
             size="large"
-            popper-class="appointment-select-dropdown"
+            popper-class="appointment-select-dropdown light-dropdown"
+            :style="{ backgroundColor: '#FFFFFF', color: '#2E3A3F', border: '1px solid #D4AF37' }"
           >
             <el-option label="Measurement Taking" value="measurement" />
             <el-option label="Fitting Session" value="fitting" />
@@ -58,11 +59,11 @@
             <el-select
               v-model="appointmentForm.time"
               placeholder="Select available time"
-              class="mobile-full-width"
+              class="mobile-full-width custom-select light-select"
               :disabled="!availableSlots.length"
               size="large"
-              style="height: 48px;"
-              popper-class="time-select-dropdown"
+              style="height: 48px; background-color: #FFFFFF !important; color: #2E3A3F !important; border: 1px solid #D4AF37 !important;"
+              popper-class="time-select-dropdown light-dropdown"
             >
               <el-option
                 v-for="(slot, index) in availableSlots"
@@ -364,6 +365,19 @@ const getServiceName = (value) => {
   height: 48px;
   font-size: 16px;
   border-radius: 8px;
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+  color: #FFEFD5 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.booking-button:hover {
+  background-color: #C9A227 !important;
+  border-color: #C9A227 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4) !important;
 }
 
 /* Dialog improvements for mobile */
@@ -373,19 +387,20 @@ const getServiceName = (value) => {
   margin: 0 auto !important;
   width: 92% !important;
   max-width: 450px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border: 1px solid #D4AF37;
 }
 
 .modern-dialog :deep(.el-dialog__header) {
   padding: 20px 20px 16px;
   margin-right: 0;
   text-align: center;
-  border-bottom: 1px solid #f0f0f0;
-  background-color: #f9f9f9;
+  border-bottom: 1px solid #D4AF37;
+  background-color: #FFF8E7;
 }
 
 .modern-dialog :deep(.el-dialog__headerbtn) {
@@ -400,26 +415,26 @@ const getServiceName = (value) => {
 .modern-dialog :deep(.el-dialog__title) {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #333;
+  color: #D4AF37;
 }
 
 .modern-dialog :deep(.el-dialog__body) {
   padding: 20px;
   max-height: 60vh;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: #FFEFD5;
 }
 
 .modern-dialog :deep(.el-dialog__footer) {
   padding: 16px 20px;
-  border-top: 1px solid #f0f0f0;
-  background-color: #f9f9f9;
+  border-top: 1px solid #D4AF37;
+  background-color: #FFF8E7;
 }
 
 /* Form improvements */
 .appointment-form :deep(.el-form-item__label) {
   font-weight: 500;
-  color: #333;
+  color: #2E3A3F;
   padding-bottom: 8px;
   font-size: 16px;
 }
@@ -428,7 +443,9 @@ const getServiceName = (value) => {
 .appointment-form :deep(.el-textarea__inner) {
   border-radius: 8px;
   padding: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(212, 175, 55, 0.15);
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
 }
 
 /* Form input enhancements */
@@ -436,19 +453,22 @@ const getServiceName = (value) => {
   font-size: 16px;
   font-weight: 500;
   padding-bottom: 8px;
-  color: #333;
+  color: #2E3A3F;
 }
 
 .appointment-form :deep(.el-input__wrapper),
 .appointment-form :deep(.el-textarea__inner) {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 2px 6px rgba(212, 175, 55, 0.15) !important;
   border-radius: 10px !important;
   padding: 4px 12px !important;
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
 }
 
 .appointment-form :deep(.el-input__wrapper.is-focus),
 .appointment-form :deep(.el-textarea__inner:focus) {
-  box-shadow: 0 0 0 1px #409eff inset !important;
+  box-shadow: 0 0 0 2px #D4AF37 inset !important;
+  border-color: #D4AF37 !important;
 }
 
 /* Mobile specific styles */
@@ -475,24 +495,79 @@ const getServiceName = (value) => {
   font-size: 16px;
   border-radius: 10px;
   padding: 0 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn {
+  background-color: transparent !important;
+  border: 1px solid #D4AF37 !important;
+  color: #2E3A3F !important;
+}
+
+.cancel-btn:hover {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  color: #2E3A3F !important;
 }
 
 .submit-btn {
   font-weight: 600;
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+  color: #FFEFD5 !important;
+}
+
+.submit-btn:hover {
+  background-color: #C9A227 !important;
+  border-color: #C9A227 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
 /* Dropdown styling */
-:deep(.appointment-select-dropdown),
-:deep(.date-picker-dropdown),
-:deep(.time-select-dropdown) {
-  border-radius: 10px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+:deep(.el-popper.is-light) {
+  border: 1px solid #D4AF37 !important;
+  background-color: #FFF8E7 !important;
+}
+
+/* Fix for the dark dropdown trigger background */
+:deep(.el-input__wrapper) {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Fix for dropdown items */
+:deep(.el-select-dropdown__item) {
+  background-color: #FFF8E7 !important;
+  color: #2E3A3F !important;
+}
+
+:deep(.el-select-dropdown__item.hover),
+:deep(.el-select-dropdown__item:hover) {
+  background-color: rgba(212, 175, 55, 0.15) !important;
+}
+
+:deep(.el-select-dropdown__item.selected) {
+  background-color: rgba(212, 175, 55, 0.25) !important;
+  color: #D4AF37 !important;
+  font-weight: 600 !important;
 }
 
 :deep(.el-select-dropdown__item) {
   height: 40px !important;
   line-height: 40px !important;
   padding: 0 16px !important;
+  color: #2E3A3F !important;
+}
+
+:deep(.el-select-dropdown__item.selected),
+:deep(.el-select-dropdown__item.hover) {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+}
+
+:deep(.el-select-dropdown__item.selected) {
+  color: #D4AF37 !important;
+  font-weight: 600 !important;
 }
 
 .success-icon-container {
@@ -542,5 +617,173 @@ const getServiceName = (value) => {
   .booking-button {
     width: auto;
   }
+}
+/* Direct targeting of the dark dropdown backgrounds */
+:deep(.el-input__wrapper),
+:deep(.el-select .el-input__wrapper),
+:deep(.el-select .el-input .el-input__wrapper),
+:deep(.el-select-dropdown__item),
+:deep(.el-select-dropdown__list),
+:deep(.el-scrollbar__view),
+:deep(.el-scrollbar),
+:deep(.el-select-dropdown),
+:deep(.el-popper),
+:deep(.el-select__popper) {
+  background-color: #FFFFFF !important;
+  color: #2E3A3F !important;
+  box-shadow: none !important;
+  border-color: #D4AF37 !important;
+}
+
+/* Direct override to prevent dark backgrounds */
+.light-select :deep(*),
+.light-dropdown :deep(*),
+.light-dropdown :deep(.el-scrollbar),
+.light-dropdown :deep(.el-select-dropdown__wrap),
+.light-select :deep(.el-input__wrapper),
+.light-select :deep(.el-input) {
+  background-color: #FFFFFF !important;
+  color: #2E3A3F !important;
+}
+
+/* Target Element Plus internal classes more aggressively */
+::v-deep(.el-select-dropdown),
+::v-deep(.el-scrollbar__view),
+::v-deep(.el-select-dropdown__list),
+::v-deep(.el-select-dropdown__item),
+::v-deep(.el-popper),
+.el-select-dropdown,
+.el-scrollbar__view,
+.el-select-dropdown__list,
+.el-select-dropdown__item,
+.el-popper {
+  background-color: #FFFFFF !important;
+  color: #2E3A3F !important;
+  border-color: #D4AF37 !important;
+}
+
+/* Force override for Element Plus dark theme on selectors */
+:deep(.el-select .el-input__wrapper),
+:deep(.el-input .el-input__wrapper) {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+}
+
+:deep(.el-select:hover .el-input__wrapper) {
+  box-shadow: 0 0 0 1px #C9A227 inset !important;
+}
+
+:deep(.el-select .is-focus .el-input__wrapper) {
+  box-shadow: 0 0 0 2px #D4AF37 inset !important;
+}
+
+/* Fix for dropdown arrows */
+:deep(.el-input__suffix),
+:deep(.el-select .el-input__suffix) {
+  color: #D4AF37 !important;
+  background-color: transparent !important;
+}
+
+:deep(.el-select .el-input__suffix-inner .el-icon) {
+  color: #D4AF37 !important;
+  background-color: transparent !important;
+}
+
+/* Fix text colors */
+:deep(.el-input__inner),
+:deep(.el-select .el-input__inner) {
+  color: #2E3A3F !important;
+}
+
+/* Fix dropdown menus */
+:deep(.el-popper),
+:deep(.el-select-dropdown),
+:deep(.el-select__popper),
+:deep(.el-select-dropdown__wrap),
+:deep(.el-scrollbar__wrap),
+:deep(.el-scrollbar__view) {
+  background-color: #FFFFFF !important;
+  border: 1px solid #D4AF37 !important;
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.2) !important;
+}
+
+/* Fix dropdown items */
+:deep(.el-select-dropdown__item) {
+  color: #2E3A3F !important;
+  background-color: #FFFFFF !important;
+}
+
+:deep(.el-select-dropdown__item.hover),
+:deep(.el-select-dropdown__item:hover) {
+  background-color: rgba(212, 175, 55, 0.15) !important;
+}
+
+:deep(.el-select-dropdown__item.selected) {
+  background-color: rgba(212, 175, 55, 0.25) !important;
+  color: #D4AF37 !important;
+  font-weight: 600 !important;
+}
+/* Force override for Element Plus dark theme on selectors - important! */
+.el-select .el-input .el-input__wrapper,
+.el-input .el-input__wrapper {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+}
+
+.el-select-dropdown,
+.el-popper.is-pure,
+.el-popper.is-light,
+.el-select__popper {
+  background-color: #FFFFFF !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+/* Global style override for Element Plus selectors */
+:root {
+  --el-bg-color: #FFFFFF !important;
+  --el-fill-color-blank: #FFFFFF !important;
+  --el-bg-color-overlay: #FFFFFF !important;
+  --el-text-color-primary: #2E3A3F !important;
+  --el-border-color: #D4AF37 !important;
+  --el-border-color-hover: #C9A227 !important;
+}
+/* Element Plus global theme override */
+:root {
+  --el-color-white: #FFFFFF !important;
+  --el-bg-color: #FFFFFF !important;
+  --el-bg-color-overlay: #FFFFFF !important;
+  --el-fill-color-blank: #FFFFFF !important;
+  --el-text-color-primary: #2E3A3F !important;
+  --el-border-color: #D4AF37 !important;
+  --el-border-color-hover: #C9A227 !important;
+  --el-color-primary: #D4AF37 !important;
+  --el-color-primary-light-3: rgba(212, 175, 55, 0.8) !important;
+  --el-color-primary-light-5: rgba(212, 175, 55, 0.6) !important;
+  --el-color-primary-light-7: rgba(212, 175, 55, 0.4) !important;
+  --el-color-primary-light-9: rgba(212, 175, 55, 0.1) !important;
+  --el-color-black: #2E3A3F !important;
+}
+
+/* Brutal force override for dark elements */
+#app .el-select-dropdown,
+#app .el-popper,
+#app .el-scrollbar,
+#app .el-scrollbar__view,
+#app .el-select-dropdown__list,
+#app .el-select-dropdown__item,
+body .el-select-dropdown,
+body .el-popper,
+body .el-scrollbar,
+body .el-scrollbar__view,
+body .el-select-dropdown__list,
+body .el-select-dropdown__item {
+  background-color: #FFFFFF !important;
+  color: #2E3A3F !important;
+  border-color: #D4AF37 !important;
+}
+
+/* Remove dark backgrounds from all Element Plus components */
+div[class*="el-"] {
+  background-color: #FFFFFF !important;
 }
 </style>

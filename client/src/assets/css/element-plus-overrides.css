@@ -1,0 +1,152 @@
+/* Element Plus overrides for dark backgrounds
+   This file targets specific Element Plus components that use dark backgrounds
+   and forces them to use light backgrounds with proper contrast */
+
+/* Global variables override */
+:root {
+  --el-color-white: #FFFFFF !important;
+  --el-bg-color: #FFFFFF !important;
+  --el-bg-color-overlay: #FFFFFF !important;
+  --el-fill-color-blank: #FFFFFF !important;
+  --el-text-color-primary: #2E3A3F !important;
+  --el-border-color: #D4AF37 !important;
+  --el-border-color-hover: #C9A227 !important;
+  --el-color-primary: #D4AF37 !important;
+  --el-color-black: #2E3A3F !important;
+}
+
+/* Fix for dark select dropdowns */
+.el-select-dropdown {
+  background-color: #FFFFFF !important;
+}
+
+.el-select-dropdown__wrap,
+.el-scrollbar__view,
+.el-select-dropdown__list {
+  background-color: #FFFFFF !important;
+}
+
+.el-select-dropdown__item {
+  color: #2E3A3F !important;
+  background-color: #FFFFFF !important;
+}
+
+.el-select-dropdown__item.hover,
+.el-select-dropdown__item:hover {
+  background-color: rgba(212, 175, 55, 0.15) !important;
+}
+
+.el-select-dropdown__item.selected {
+  color: #D4AF37 !important;
+  background-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+/* Override for popper elements */
+.el-popper {
+  background-color: #FFFFFF !important;
+  border-color: #D4AF37 !important;
+}
+
+.el-popper.is-light,
+.el-popper.is-pure {
+  background-color: #FFFFFF !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+/* Fix for dropdown triggers */
+.el-select .el-input__wrapper,
+.el-select .el-input .el-input__wrapper {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+}
+
+/* Fix for dropdown arrows */
+.el-select .el-input__suffix {
+  color: #D4AF37 !important;
+  background-color: transparent !important;
+}
+
+.el-select .el-input__suffix-inner .el-icon {
+  color: #D4AF37 !important;
+  background-color: transparent !important;
+}
+
+/* Time picker specific fixes */
+.el-time-select {
+  background-color: #FFFFFF !important;
+}
+
+.el-time-panel {
+  background-color: #FFFFFF !important;
+}
+
+.el-time-spinner__wrapper {
+  background-color: #FFFFFF !important;
+}
+
+.el-time-spinner__item {
+  color: #2E3A3F !important;
+}
+
+/* Global fix for any Element Plus dark backgrounds */
+.el-overlay,
+.el-message-box,
+.el-dialog,
+.el-dropdown-menu {
+  background-color: #FFFFFF !important;
+}
+
+/* Fix for dropdown menu items */
+.el-dropdown-menu__item {
+  color: #2E3A3F !important;
+  background-color: #FFFFFF !important;
+}
+
+/* Fix for buttons with dark backgrounds */
+.el-button--primary {
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+  color: #FFFFFF !important;
+}
+
+.el-button--primary:hover {
+  background-color: #C9A227 !important;
+  border-color: #C9A227 !important;
+}
+
+.el-button--default {
+  background-color: #FFFFFF !important;
+  border-color: #D4AF37 !important;
+  color: #2E3A3F !important;
+}
+
+/* Fix for dark text */
+.el-form-item__label,
+.el-input__inner,
+.el-textarea__inner {
+  color: #2E3A3F !important;
+}
+
+/* Fix for select inputs in dark mode */
+.el-input.is-focus .el-input__wrapper {
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+}
+
+/* These target the dark background elements */
+.el-select .el-input .el-input__wrapper,
+.el-select:not(.is-disabled) .el-input.is-focus .el-input__wrapper,
+.el-select-dropdown__item.hover,
+.el-select-dropdown__item:hover,
+.el-select .el-input__suffix,
+.el-select .el-input__wrapper,
+.el-select .el-input .el-input__inner,
+.el-select-dropdown__item {
+  background-color: #FFFFFF !important;
+  color: #2E3A3F !important;
+}
+
+/* Overriding the exact dropdown elements used in the booking form */
+.appointment-select-dropdown,
+.time-select-dropdown {
+  background-color: #FFFFFF !important;
+}

@@ -1,13 +1,13 @@
 <template>
-  <div class="inventory-page">
+  <div class="inventory-page admin-card">
     <div class="mb-6 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-primary">Inventory Management</h1>
-      <el-button type="primary" @click="showAddMaterialDialog">Add New Material</el-button>
+      <h1 class="text-2xl font-bold admin-text-gold">Inventory Management</h1>
+      <el-button type="primary" @click="showAddMaterialDialog" class="admin-btn-primary">Add New Material</el-button>
     </div>
     
     <!-- Inventory Overview Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6" v-loading="overviewLoading">
-      <el-card shadow="hover">
+      <el-card shadow="hover" class="admin-card">
         <div class="flex items-center gap-4">
           <div class="p-3 rounded-full bg-blue-100">
             <package-icon :size="24" class="text-blue-500" />
@@ -19,7 +19,7 @@
         </div>
       </el-card>
       
-      <el-card shadow="hover">
+      <el-card shadow="hover" class="admin-card">
         <div class="flex items-center gap-4">
           <div class="p-3 rounded-full bg-amber-100">
             <alert-triangle-icon :size="24" class="text-amber-500" />
@@ -31,7 +31,7 @@
         </div>
       </el-card>
       
-      <el-card shadow="hover">
+      <el-card shadow="hover" class="admin-card">
         <div class="flex items-center gap-4">
           <div class="p-3 rounded-full bg-green-100">
             <dollar-sign-icon :size="24" class="text-green-500" />
@@ -45,10 +45,10 @@
     </div>
     
     <!-- Inventory Table -->
-    <el-card shadow="hover">
+    <el-card shadow="hover" class="admin-card">
       <template #header>
         <div class="flex justify-between items-center">
-          <h3 class="text-lg font-bold text-primary">Materials Inventory</h3>
+          <h3 class="text-lg font-bold admin-text-gold">Materials Inventory</h3>
           <div class="flex gap-2">
             <el-input 
               placeholder="Search materials..." 
@@ -56,6 +56,7 @@
               v-model="searchQuery" 
               style="width: 250px" 
               @input="fetchInventory"
+              class="admin-input"
             />
             <el-select 
               placeholder="Category" 
@@ -63,6 +64,7 @@
               clearable 
               style="width: 150px"
               @change="fetchInventory"
+              class="admin-select"
             >
               <el-option label="All" value="" />
               <el-option label="Fabrics" value="fabrics" />
@@ -71,12 +73,12 @@
               <el-option label="Zippers" value="zippers" />
               <el-option label="Accessories" value="accessories" />
             </el-select>
-            <el-checkbox v-model="showLowStock" @change="fetchInventory">Low Stock Only</el-checkbox>
+            <el-checkbox v-model="showLowStock" @change="fetchInventory" class="admin-checkbox">Low Stock Only</el-checkbox>
           </div>
         </div>
       </template>
       
-      <el-table :data="inventoryItems" style="width: 100%" v-loading="tableLoading">
+      <el-table :data="inventoryItems" style="width: 100%" v-loading="tableLoading" class="admin-table">
         <el-table-column label="ID" width="80">
           <template #default="scope">
             <span class="text-xs">{{ scope.row.id ? scope.row.id.substring(0, 8) : '' }}</span>
@@ -130,7 +132,7 @@
         </el-table-column>
       </el-table>
       
-      <div class="flex justify-center mt-4">
+      <div class="flex justify-center mt-4 admin-pagination">
         <el-pagination
           v-model:current-page="currentPage"
           v-model:page-size="pageSize"
@@ -148,20 +150,22 @@
       v-model="materialFormVisible" 
       :title="isEditMode ? 'Edit Material' : 'Add New Material'" 
       width="60%"
+      class="admin-dialog"
     >
       <el-form 
         ref="materialFormRef"
         :model="materialForm" 
         :rules="materialFormRules"
         label-position="top"
+        class="admin-form"
       >
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <el-form-item label="Name" prop="name">
-            <el-input v-model="materialForm.name" />
+            <el-input v-model="materialForm.name" class="admin-input" />
           </el-form-item>
           
           <el-form-item label="Category" prop="category">
-            <el-select v-model="materialForm.category" class="w-full">
+            <el-select v-model="materialForm.category" class="w-full admin-select">
               <el-option label="Fabrics" value="fabrics" />
               <el-option label="Threads" value="threads" />
               <el-option label="Buttons" value="buttons" />
@@ -172,7 +176,7 @@
         </div>
         
         <el-form-item label="Description">
-          <el-input type="textarea" v-model="materialForm.description" rows="3" />
+          <el-input type="textarea" v-model="materialForm.description" rows="3" class="admin-input" />
         </el-form-item>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -181,7 +185,7 @@
           </el-form-item>
           
           <el-form-item label="Unit" prop="unit">
-            <el-select v-model="materialForm.unit" class="w-full">
+            <el-select v-model="materialForm.unit" class="w-full admin-select">
               <el-option label="Meters" value="meters" />
               <el-option label="Yards" value="yards" />
               <el-option label="Pieces" value="pieces" />
@@ -198,35 +202,19 @@
         <el-form-item label="Minimum Quantity" prop="min_quantity">
           <el-input-number 
             v-model="materialForm.min_quantity" 
-            :min="0" 
-            class="w-full"
-            :max="materialForm.quantity"
-          />
-          <div class="text-xs text-gray-500 mt-1">You'll receive alerts when stock falls below this level</div>
-        </el-form-item>
-      </el-form>
-      
-      <template #footer>
-        <el-button @click="materialFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="submitMaterialForm" :loading="formLoading">
-          {{ isEditMode ? 'Update Material' : 'Add Material' }}
-        </el-button>
-      </template>
-    </el-dialog>
-    
-    <!-- Update Stock Dialog -->
-    <el-dialog v-model="stockUpdateVisible" title="Update Stock" width="40%">
+            :min="0"
+            class="w-full admin-input-number" 
       <div v-if="selectedMaterial" class="mb-4">
         <h3 class="font-medium">{{ selectedMaterial.name }}</h3>
         <p class="text-sm text-gray-500">Current stock: {{ selectedMaterial.quantity }} {{ selectedMaterial.unit }}</p>
       </div>
       
-      <el-form :model="stockForm" label-position="top">
+      <el-form :model="stockForm" label-position="top" class="admin-form">
         <el-form-item label="Operation">
-          <el-radio-group v-model="stockForm.operation">
-            <el-radio label="add">Add Stock</el-radio>
-            <el-radio label="subtract">Remove Stock</el-radio>
-            <el-radio label="set">Set Exact Amount</el-radio>
+          <el-radio-group v-model="stockForm.operation" class="admin-radio-group">
+            <el-radio label="add" class="admin-radio">Add Stock</el-radio>
+            <el-radio label="subtract" class="admin-radio">Remove Stock</el-radio>
+            <el-radio label="set" class="admin-radio">Set Exact Amount</el-radio>
           </el-radio-group>
         </el-form-item>
         
@@ -235,13 +223,16 @@
             v-model="stockForm.quantity" 
             :min="stockForm.operation === 'subtract' ? 1 : 0" 
             :max="stockForm.operation === 'subtract' ? selectedMaterial?.quantity : undefined"
+            class="admin-input-number"
           />
         </el-form-item>
       </el-form>
       
       <template #footer>
-        <el-button @click="stockUpdateVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="confirmStockUpdate" :loading="updateLoading">Update Stock</el-button>
+        <div class="flex justify-end gap-2">
+          <el-button @click="stockUpdateVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="confirmStockUpdate" :loading="updateLoading" class="admin-btn-primary">Update Stock</el-button>
+        </div>
       </template>
     </el-dialog>
   </div>

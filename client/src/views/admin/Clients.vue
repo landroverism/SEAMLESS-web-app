@@ -19,13 +19,13 @@
               placeholder="Search clients..."
               prefix-icon="Search"
               clearable
-              class="search-box mobile-full-width"
+              class="search-box mobile-full-width admin-input"
             />
             <el-select
               v-model="filterStatus"
               placeholder="Filter by status"
               clearable
-              class="w-full mobile-full-width"
+              class="w-full mobile-full-width admin-select"
             >
               <el-option label="Active" value="active" />
               <el-option label="Inactive" value="inactive" />
@@ -34,7 +34,7 @@
             <el-select
               v-model="sortBy"
               placeholder="Sort by"
-              class="w-full mobile-full-width"
+              class="w-full mobile-full-width admin-select"
             >
               <el-option label="Name (A-Z)" value="name_asc" />
               <el-option label="Name (Z-A)" value="name_desc" />
@@ -45,19 +45,20 @@
         </el-card>
 
         <!-- Client List -->
-        <el-card shadow="hover" class="mb-6">
+        <el-card shadow="hover" class="mb-6 admin-card">
           <el-table
             :data="filteredClients"
             style="width: 100%"
             @row-click="viewClientDetails"
+            class="admin-table"
           >
             <el-table-column label="Client" min-width="250">
               <template #default="scope">
                 <div class="flex items-center gap-3">
                   <el-avatar :size="40" :src="scope.row.avatar" />
                   <div>
-                    <div class="font-bold text-primary">{{ scope.row.name }}</div>
-                    <div class="text-sm text-gray-500">{{ scope.row.email }}</div>
+                    <div class="font-bold admin-text-gold">{{ scope.row.name }}</div>
+                    <div class="text-sm admin-text-muted">{{ scope.row.email }}</div>
                   </div>
                 </div>
               </template>
@@ -97,7 +98,7 @@
             </el-table-column>
           </el-table>
           
-          <div class="flex justify-center mt-4 overflow-x-auto py-2">
+          <div class="flex justify-center mt-4 overflow-x-auto py-2 admin-pagination">
             <el-pagination
               v-model:current-page="currentPage"
               v-model:page-size="pageSize"
@@ -118,19 +119,19 @@
       v-model="clientDetailsVisible"
       title="Client Details"
       :width="windowWidth <= 768 ? '95%' : '70%'"
-      class="client-details-dialog"
+      class="client-details-dialog admin-dialog"
     >
       <div v-if="selectedClient">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Client Profile -->
           <div class="md:col-span-1">
-            <el-card shadow="never" class="h-full">
+            <el-card shadow="never" class="h-full admin-card">
               <div class="flex flex-col items-center text-center mb-6">
                 <el-avatar :size="100" :src="selectedClient.avatar" class="mb-4" />
-                <h3 class="text-xl font-bold text-primary">{{ selectedClient.name }}</h3>
-                <p class="text-gray-500">Client since {{ selectedClient.joinDate }}</p>
+                <h3 class="text-xl font-bold admin-text-gold">{{ selectedClient.name }}</h3>
+                <p class="admin-text-muted">Client since {{ selectedClient.joinDate }}</p>
                 <div class="mt-4 flex gap-2">
-                  <el-button type="primary" plain size="small">
+                  <el-button type="primary" plain size="small" class="admin-btn-primary">
                     <message-square-icon :size="16" class="mr-1" />
                     Message
                   </el-button>
@@ -163,13 +164,13 @@
           
           <!-- Client Preferences and Requirements -->
           <div class="md:col-span-2">
-            <el-tabs>
+            <el-tabs class="admin-tabs">
               <el-tab-pane label="Preferences & Requirements">
-                <el-card shadow="never" class="mb-6">
+                <el-card shadow="never" class="mb-6 admin-card">
                   <template #header>
                     <div class="flex justify-between items-center">
-                      <h3 class="text-lg font-bold text-primary">Client Preferences</h3>
-                      <el-button type="primary" plain size="small">
+                      <h3 class="text-lg font-bold admin-text-gold">Client Preferences</h3>
+                      <el-button type="primary" plain size="small" class="admin-btn-primary">
                         <edit-icon :size="16" class="mr-1" />
                         Edit
                       </el-button>
@@ -364,7 +365,7 @@ const totalClients = ref(125)
 const clients = ref([
   {
     id: 1,
-    name: 'John Smith',
+    name: 'Moen Mbagaya',
     email: 'john.smith@example.com',
     phone: '+254 712 345 678',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
@@ -412,7 +413,7 @@ const clients = ref([
   },
   {
     id: 2,
-    name: 'Sarah Johnson',
+    name: 'Kylie  Otieno',
     email: 'sarah.j@example.com',
     phone: '+254 723 456 789',
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
@@ -458,7 +459,7 @@ const clients = ref([
   },
   {
     id: 3,
-    name: 'Michael Brown',
+    name: 'Michael Magiri',
     email: 'michael.b@example.com',
     phone: '+254 734 567 890',
     avatar: 'https://randomuser.me/api/portraits/men/22.jpg',

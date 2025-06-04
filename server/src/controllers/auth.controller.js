@@ -157,6 +157,7 @@ exports.login = async (req, res, next) => {
     // Sign in with Supabase auth
     let authData, authError;
     try {
+      console.log(`Attempting to authenticate user: ${email}`);
       const authResponse = await supabase.auth.signInWithPassword({
         email,
         password
@@ -165,14 +166,30 @@ exports.login = async (req, res, next) => {
       authError = authResponse.error;
     } catch (connectionError) {
       console.error('Supabase connection error:', connectionError);
+      
+      // Check if it's a network connectivity issue
+      if (connectionError.code === 'EAI_AGAIN' || 
+          connectionError.message?.includes('getaddrinfo') ||
+          connectionError.message?.includes('fetch failed')) {
+        return res.status(503).json({
+          success: false,
+          message: 'Network connectivity issue. Cannot connect to authentication service.',
+          error: 'Please check your internet connection and try again later.',
+          isNetworkError: true
+        });
+      }
+      
+      // Other connection errors
       return res.status(503).json({
         success: false,
         message: 'Authentication service unavailable. Please try again later.',
-        error: connectionError.message || 'Connection timeout'
+        error: connectionError.message || 'Connection timeout',
+        isNetworkError: true
       });
     }
 
     if (authError) {
+      console.error('Authentication error:', authError);
       throw new ApiError('Invalid credentials', 401);
     }
 
@@ -189,10 +206,34 @@ exports.login = async (req, res, next) => {
       tailorError = tailorResponse.error;
     } catch (connectionError) {
       console.error('Supabase connection error during profile retrieval:', connectionError);
-      return res.status(503).json({
-        success: false,
-        message: 'Profile service unavailable. Please try again later.',
-        error: connectionError.message || 'Connection timeout'
+      
+      // If we can authenticate but can't get the profile due to network issues,
+      // we'll still return a valid token but with a warning
+      console.log('Creating fallback response with auth data only');
+      
+      // Create a JWT token with available user data
+      const token = jwt.sign(
+        { 
+          id: authData.user.id,
+          email: authData.user.email,
+          role: authData.user.user_metadata?.role || 'tailor',
+          isAdmin: authData.user.user_metadata?.isAdmin || false
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: '7d' }
+      );
+      
+      return res.status(206).json({
+        success: true,
+        message: 'Authenticated successfully, but profile data is unavailable. Some features may be limited.',
+        token,
+        user: {
+          id: authData.user.id,
+          email: authData.user.email,
+          role: authData.user.user_metadata?.role || 'tailor',
+          isAdmin: authData.user.user_metadata?.isAdmin || false
+        },
+        partialData: true
       });
     }
 

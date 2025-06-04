@@ -1,0 +1,436 @@
+/* Admin Panel Theme Styles */
+
+/* Common text colors */
+.admin-text-primary {
+  color: #2E3A3F !important;
+}
+
+.admin-text-secondary {
+  color: #555555 !important;
+}
+
+.admin-text-muted {
+  color: #777777 !important;
+}
+
+.admin-text-gold {
+  color: #D4AF37 !important;
+}
+
+/* Apply text colors to common elements */
+.el-form-item__label, 
+.el-table th.el-table__cell,
+.el-table td.el-table__cell,
+p, h1, h2, h3, h4, h5, h6, span, div {
+  color: #2E3A3F !important;
+}
+
+/* Override for specific text that should be gold */
+.text-2xl.font-bold, 
+.text-xl.font-bold,
+.text-lg.font-bold,
+.el-tabs__header {
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+  margin-bottom: 20px !important;
+}
+.el-card__header h3 {
+  color: #D4AF37 !important;
+}
+
+/* Card and container styling */
+.admin-card, .el-card {
+  background-color: #FFF8E7 !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+  font-weight: 600 !important;
+  background-color: rgba(212, 175, 55, 0.08) !important;
+  box-shadow: 0 -2px 8px rgba(212, 175, 55, 0.1) !important;
+}
+
+/* Specific background for admin pages (excluding Dashboard) */
+.clients-page, .inventory-page, .settings-page, .settings-container {
+  background-color: #FFEFD5 !important;
+  color: #2E3A3F !important;
+}
+
+/* Preserve Dashboard original styling */
+/* Dashboard uses its own custom styling with dark theme */
+
+/* Exclude Dashboard from general styling */
+.admin-dashboard .el-card,
+.admin-dashboard .el-select,
+.admin-dashboard .el-input,
+.admin-dashboard .el-table,
+.admin-dashboard .el-pagination,
+.admin-dashboard .el-tabs,
+.admin-dashboard h1, .admin-dashboard h2, .admin-dashboard h3,
+.admin-dashboard p, .admin-dashboard span, .admin-dashboard div {
+  /* Reset any !important styles to allow Dashboard's original styling */
+  color: initial;
+  background-color: initial;
+  border-color: initial;
+  box-shadow: initial;
+}
+
+/* Admin panel specific styling */
+.el-header.admin-header {
+  background-color: #FFF8E7 !important;
+  border-bottom: 2px solid #D4AF37 !important;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15) !important;
+  margin-bottom: 1rem !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.3s ease !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+}
+
+.el-header.admin-header .text-gray-800,
+.el-header.admin-header .text-gray-600 {
+  color: #2E3A3F !important;
+}
+
+.el-menu-item {
+  color: #2E3A3F !important;
+  font-weight: 500 !important;
+  padding: 0 20px !important;
+  height: 50px !important;
+  line-height: 50px !important;
+  position: relative !important;
+  transition: all 0.3s ease !important;
+  border-radius: 6px !important;
+  margin: 2px 8px !important;
+}
+
+.el-menu-item.is-active {
+  color: #D4AF37 !important;
+  background-color: rgba(212, 175, 55, 0.15) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2) !important;
+}
+
+.el-menu-item:hover {
+  background-color: rgba(212, 175, 55, 0.08) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.1) !important;
+}
+
+/* Admin dropdown styling */
+.el-dropdown-menu {
+  background-color: #FFF8E7 !important;
+  border: 1px solid #D4AF37 !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.el-dropdown-menu__item {
+  color: #2E3A3F !important;
+}
+
+.el-dropdown-menu__item:hover {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  color: #D4AF37 !important;
+}
+
+/* Notification badge styling */
+.notification-badge .el-badge__content {
+  background-color: #D4AF37 !important;
+  border: none !important;
+}
+
+/* Avatar styling */
+.el-avatar {
+  border: 2px solid #D4AF37 !important;
+}
+
+/* Divider styling */
+.el-divider {
+  background-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+.el-divider__text {
+  background-color: #FFEFD5 !important;
+  color: #2E3A3F !important;
+}
+
+/* Tooltip styling */
+.el-tooltip__popper {
+  background-color: #2E3A3F !important;
+  color: #FFFFFF !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+.el-tooltip__popper .popper__arrow::after {
+  border-top-color: #2E3A3F !important;
+  border-bottom-color: #2E3A3F !important;
+}
+
+/* Alert styling */
+.el-alert {
+  background-color: #FFF8E7 !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+.el-alert--success {
+  background-color: rgba(103, 194, 58, 0.1) !important;
+}
+
+.el-alert--info {
+  background-color: rgba(144, 147, 153, 0.1) !important;
+}
+
+.el-alert--warning {
+  background-color: rgba(230, 162, 60, 0.1) !important;
+}
+
+.el-alert--error {
+  background-color: rgba(245, 108, 108, 0.1) !important;
+}
+
+.el-alert__title {
+  color: #2E3A3F !important;
+}
+
+.el-alert__description {
+  color: #2E3A3F !important;
+}
+
+/* Admin layout main content area */
+.el-main.admin-content {
+  background-color: #FFEFD5 !important;
+  padding: 20px !important;
+}
+
+/* Form labels */
+.el-form-item__label {
+  color: #333333 !important;
+  font-weight: 600 !important;
+}
+
+/* Textarea styling */
+.el-textarea__inner {
+  background-color: #FFFFFF !important;
+  border: 1px solid #D4AF37 !important;
+  color: #2E3A3F !important;
+}
+
+.admin-card-header {
+  background-color: #F5E5C0 !important; /* Slightly darker than Papaya Whip */
+  border-bottom: 1px solid #D4AF37 !important;
+}
+
+/* Form controls */
+.admin-input .el-input__wrapper, .el-input__wrapper {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+  border: 1px solid #D4AF37 !important;
+  color: #2E3A3F !important;
+}
+
+.admin-input .el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+}
+
+.admin-input .el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+}
+
+.admin-input .el-input__inner, .el-input__inner {
+  color: #2E3A3F !important;
+  background-color: #FFFFFF !important;
+}
+
+.admin-select .el-input__wrapper, .el-select .el-input__wrapper {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+.admin-select .el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+}
+
+.admin-select .el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px #D4AF37 inset !important;
+}
+
+/* Button styling */
+.admin-btn-primary {
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+  color: #FFFFFF !important;
+}
+
+.admin-btn-primary:hover {
+  background-color: #E5C158 !important;
+  border-color: #E5C158 !important;
+}
+
+/* Table styling */
+.admin-table .el-table, .el-table {
+  background-color: #FFFFFF !important;
+  color: #2E3A3F !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+.admin-table .el-table th.el-table__cell, .el-table th.el-table__cell {
+  background-color: #F5E5C0 !important;
+  color: #2E3A3F !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid #D4AF37 !important;
+}
+
+.admin-table .el-table__row:hover > td.el-table__cell {
+  background-color: rgba(212, 175, 55, 0.05) !important;
+}
+
+.admin-table .el-table td.el-table__cell {
+  color: #2E3A3F !important;
+}
+
+/* Pagination styling */
+.admin-pagination .el-pagination .el-pagination__total,
+.admin-pagination .el-pagination .el-pagination__jump {
+  color: #2E3A3F !important;
+}
+
+.admin-pagination .el-pagination .btn-prev,
+.admin-pagination .el-pagination .btn-next {
+  background-color: #FFF8E7 !important;
+  color: #2E3A3F !important;
+}
+
+.admin-pagination .el-pagination .el-pager li {
+  background-color: #FFF8E7 !important;
+  color: #2E3A3F !important;
+}
+
+.admin-pagination .el-pagination .el-pager li.is-active {
+  color: #D4AF37 !important;
+  font-weight: bold !important;
+}
+
+/* Dialog styling */
+.admin-dialog .el-dialog, .el-dialog {
+  background-color: #FFF8E7 !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+.admin-dialog .el-dialog__header, .el-dialog__header {
+  background-color: #F5E5C0 !important;
+  border-bottom: 1px solid #D4AF37 !important;
+}
+
+.admin-dialog .el-dialog__title, .el-dialog__title {
+  color: #2E3A3F !important;
+  font-weight: 600 !important;
+}
+
+/* Tabs styling */
+.admin-tabs .el-tabs__item, .el-tabs__item {
+  color: #2E3A3F !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  padding: 0 20px !important;
+  height: 48px !important;
+  line-height: 48px !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  border-radius: 6px 6px 0 0 !important;
+  margin-right: 4px !important;
+  letter-spacing: 0.3px !important;
+}
+
+.admin-tabs .el-tabs__item.is-active, .el-tabs__item.is-active {
+  color: #D4AF37 !important;
+  font-weight: 600 !important;
+  background-color: rgba(212, 175, 55, 0.08) !important;
+  box-shadow: 0 -2px 8px rgba(212, 175, 55, 0.1) !important;
+}
+
+.el-tabs__active-bar {
+  background-color: #D4AF37 !important;
+  height: 3px !important;
+  border-radius: 3px !important;
+  box-shadow: 0 1px 3px rgba(212, 175, 55, 0.3) !important;
+}
+
+.el-tabs__nav-wrap::after {
+  background-color: rgba(212, 175, 55, 0.2) !important;
+  height: 1px !important;
+}
+
+/* Checkbox styling */
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+}
+
+.el-checkbox__inner {
+  background-color: #FFF8E7 !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+.el-checkbox__label {
+  color: #2E3A3F !important;
+}
+
+/* Radio styling */
+.el-radio__input.is-checked .el-radio__inner {
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+}
+
+.el-radio__inner {
+  background-color: #FFF8E7 !important;
+  border: 1px solid #D4AF37 !important;
+}
+
+.el-radio__label {
+  color: #2E3A3F !important;
+}
+
+.admin-tabs .el-tabs__active-bar {
+  background-color: #D4AF37 !important;
+  height: 3px !important;
+  border-radius: 3px !important;
+  box-shadow: 0 1px 3px rgba(212, 175, 55, 0.3) !important;
+}
+
+.admin-tabs .el-tabs__nav-wrap::after {
+  background-color: rgba(212, 175, 55, 0.2) !important;
+  height: 1px !important;
+}
+
+/* Tag styling */
+.admin-tag .el-tag {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  border-color: #D4AF37 !important;
+  color: #D4AF37 !important;
+}
+
+/* Form labels */
+.admin-form .el-form-item__label {
+  color: #2E3A3F !important;
+  font-weight: 500 !important;
+}
+
+/* Checkbox and radio styling */
+.admin-checkbox .el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+}
+
+.admin-checkbox .el-checkbox__label {
+  color: #2E3A3F !important;
+}
+
+.admin-radio .el-radio__input.is-checked .el-radio__inner {
+  background-color: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+}
+
+.admin-radio .el-radio__label {
+  color: #2E3A3F !important;
+}

@@ -25,15 +25,24 @@ export default {
         success: 'var(--color-success)',
         warning: 'var(--color-warning)',
         info: 'var(--color-info)',
+        // Direct color references for the new palette
+        'soft-black': '#2E3A3F',
+        'star-yellow': '#FBBF24',
+        'muted-cyan': '#E0F6F2',
+        'placeholder-grey': '#AEB5BA',
+        'border-grey': '#E5E7EB',
+        'papaya-whip': '#FFEFD5',
       },
       backgroundColor: {
         primary: 'var(--color-primary)',
         secondary: 'var(--color-background)',
         card: 'var(--color-card)',
+        'submit-button': 'var(--color-info)',
       },
       textColor: {
         primary: 'var(--color-text)',
         secondary: 'var(--color-text-muted)',
+        'submit-button': 'var(--color-primary)',
       },
       borderColor: {
         primary: 'var(--color-border)',
