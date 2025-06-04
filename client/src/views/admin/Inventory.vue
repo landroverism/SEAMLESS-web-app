@@ -204,6 +204,10 @@
             v-model="materialForm.min_quantity" 
             :min="0"
             class="w-full admin-input-number" 
+          />
+        </el-form-item>
+      </el-form>
+      
       <div v-if="selectedMaterial" class="mb-4">
         <h3 class="font-medium">{{ selectedMaterial.name }}</h3>
         <p class="text-sm text-gray-500">Current stock: {{ selectedMaterial.quantity }} {{ selectedMaterial.unit }}</p>
