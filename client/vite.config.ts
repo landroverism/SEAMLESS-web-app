@@ -8,7 +8,17 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      // Add explicit aliases for Vue packages to prevent circular dependencies
+      'vue': path.resolve(__dirname, './node_modules/vue/dist/vue.runtime.esm-bundler.js'),
+      'pinia': path.resolve(__dirname, './node_modules/pinia/dist/pinia.esm-bundler.js')
     },
+    // Ensure proper module resolution
+    dedupe: ['vue', 'vue-router', 'pinia']
+  },
+  define: {
+    // Fix for production mode
+    '__VUE_OPTIONS_API__': true,
+    '__VUE_PROD_DEVTOOLS__': false
   },
   // Optimize build for production
   build: {
@@ -21,23 +31,19 @@ export default defineConfig({
     // Improve chunking strategy
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          // Create separate chunks for large dependencies
-          if (id.includes('node_modules/element-plus')) {
-            return 'element-plus'
-          }
-          if (id.includes('node_modules/vue') || 
-              id.includes('node_modules/vue-router') || 
-              id.includes('node_modules/pinia')) {
-            return 'vue-vendor'
-          }
-          if (id.includes('node_modules/chart.js')) {
-            return 'chart'
-          }
-        }
+        // Ensure proper code splitting
+        manualChunks: {
+          'vue-vendor': ['vue', 'vue-router'],
+          'pinia': ['pinia'],
+          'element-plus': ['element-plus'],
+          'chart': ['chart.js']
+        },
+        // Prevent chunk invalidation
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js'
       }
     },
-    // Use esbuild minifier instead of terser
+    // Use esbuild minifier
     minify: 'esbuild',
     target: 'es2015',
   },
@@ -51,6 +57,14 @@ export default defineConfig({
   },
   // Optimize dependencies
   optimizeDeps: {
-    include: ['vue', 'vue-router', 'pinia', 'element-plus']
+    include: ['vue', 'vue-router', 'pinia', 'element-plus'],
+    // Force optimization of these dependencies
+    force: true
+  },
+  // Prevent dev server issues
+  server: {
+    fs: {
+      strict: false
+    }
   }
 })
