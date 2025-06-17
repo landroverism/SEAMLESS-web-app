@@ -1,0 +1,25 @@
+{
+  "name": "tailorly",
+  "version": "1.0.0",
+  "description": "Tailorly - Custom Tailoring Platform",
+  "scripts": {
+    "install": "cd server && npm install",
+    "start": "cd server && npm start",
+    "build": "cd server && npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0 <21.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/landroverism/Tailorly"
+  },
+  "keywords": [
+    "tailoring",
+    "express",
+    "vue",
+    "supabase"
+  ],
+  "author": "",
+  "license": "ISC"
+}

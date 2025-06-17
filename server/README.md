@@ -1,5 +1,23 @@
 # Tailorly Backend API
 
+## Deployment to Render
+
+This API is configured for easy deployment to Render.com:
+
+1. Create a new Web Service in your Render dashboard
+2. Connect your GitHub repository
+3. Use the following settings:
+   - **Environment**: Node
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+   - **Environment Variables**: Add all variables from `.env.example`
+
+Alternatively, you can use the included `render.yaml` file for Blueprint deployments:
+
+```bash
+render blueprint up
+```
+
 This is the backend API for the Tailorly application, a custom tailoring platform that enables tailors to manage clients, orders, inventory, and analytics.
 
 ## Technology Stack
